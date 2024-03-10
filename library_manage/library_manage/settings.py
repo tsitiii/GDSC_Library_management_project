@@ -28,6 +28,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account.apps.AccountConfig',
+    'bookmanagement.apps.BookmanagementConfig',
+    'borrowingmanagement.apps.BorrowingmanagementConfig',
+    'reviewsmanagement.apps.ReviewsmanagementConfig',
 ]
 
 MIDDLEWARE = [
