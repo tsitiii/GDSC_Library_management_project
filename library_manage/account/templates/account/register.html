@@ -1,119 +1,60 @@
+
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'account/style.css' %}">
+  
     <title>Register page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f1f1f1;
-        }
-        
-        .form-container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Custom radio buttons */
-        .radio-group {
-            display: flex;
-            flex-direction: column;
-            margin-top: 20px;
-        }
-        
-        .radio-group label {
-            position: relative;
-            padding-left: 30px;
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
-        
-        .radio-group input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-        }
-        
-        .checkmark {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 20px;
-            width: 20px;
-            background-color: #eee;
-            border-radius: 50%;
-        }
-        
-        .radio-group input[type="radio"]:checked + .checkmark {
-            background-color: #2196F3;
-        }
-        
-        .checkmark:after {
-            content: "";
-            position: absolute;
-            display: none;
-        }
-        
-        .radio-group input[type="radio"]:checked + .checkmark:after {
-            display: block;
-        }
-        
-        .radio-group .checkmark:after {
-            top: 6px;
-            left: 6px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #fff;
-        }
-        
-        button[type="submit"] {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #2196F3;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        
-        button[type="submit"]:hover {
-            background-color: green;
-        }
-    </style>
+    
 </head>
 <body>
     <div class="form-container">
-        <h1 style="color: darkorange;">Register Form</h1>
-        <form method="POST" action="{% url 'register' %}">
+        <h1 style="color: darkorange; text-align: center;">Register Form</h1>
+        <form method="post" action="{% url 'register' %}">
             {% csrf_token %}
-            {{ form.as_p }}
-          
-            {% comment %} <div class="radio-group">
-                <label>
-                    <input type="radio" name="choice">
-                    <span class="checkmark"></span> Student
+            <div class="form-group">
+                <label for="username">Username</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                {{ form.password1 }}
+            </div>
+            <div class="form-group">
+                <label for="password">Confirm Password</label>
+                {{ form.password2 }}
+            </div>
+
+            <div class="d-flex mb-5 align-items-center">
+                <label class="control control--checkbox mb-0"><span class="caption">Admin</span>
+                    {{ form.is_admin }}
+                  <div class="control__indicator"></div>
                 </label>
-                <label>
-                    <input type="radio" name="choice">
-                    <span class="checkmark"></span> Admin
+              </div>
+              <div class="d-flex mb-5 align-items-center">
+                <label class="control control--checkbox mb-0"><span class="caption">super Admin</span>
+                    {{ form.is_super_admin }}
+                  <div class="control__indicator"></div>
                 </label>
-                <label>
-                    <input type="radio" name="choice">
-                    <span class="checkmark"></span> Super Admin
+              </div>
+              <div class="d-flex mb-5 align-items-center">
+                <label class="control control--checkbox mb-0"><span class="caption">student</span>
+                    {{ form.is_student}}
+                  <div class="control__indicator"></div>
                 </label>
-            </div> {% endcomment %}
-            <button type="submit">Register</button>
-        </form>
-    </div>
-</body>
+              </div>
+                <span class="text-error">{{ form.errors }}</span>
+
+                <input type="submit"  value="Register" class="btn btn-pill text-white btn-block btn-primary">
+            </form>
+            </div>
+         <script src="{% static 'account/responsive.js' %}"></script>   
+    </body>
 </html>
