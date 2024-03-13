@@ -51,6 +51,27 @@ def edit_book(request, pk):
         form = BookForm(instance=book)
     return render(request, 'bookmanagement/editbook.html', {'form': form})
 
+
+
+def editbook(request):
+    if request.method=='POST':
+        t= request.POST["title"]
+        a= request.POST["author"]
+        p=request.POST["price"]
+        s=request.POST["status"]
+
+        book= Book.objects.get(id=request.POST['bookid'])
+        book.title=t
+        book.author=a
+        book.price=p
+        book.status=s
+        book.save()
+        return redirect('bookmanagement:book_list')
+    
+    return render(request, 'bookmanagement/editbook.html')
+
+
+
 @login_required
 @admin_required
 def delete_book(request, pk):
@@ -59,3 +80,26 @@ def delete_book(request, pk):
         book.delete()
         return redirect('bookmanagement:book_list')
     return render(request, 'bookmanagement/deletebook.html', {'book': book})
+
+
+
+def book_list_view(request):
+    books = Book.objects.all()
+    search_query = request.GET.get('q')
+    genre_filter = request.GET.get('genre')
+    author_filter = request.GET.get('author')
+    status_filter = request.GET.get('status')
+
+    if search_query:
+        books = books.filter(title__icontains=search_query)
+
+    if genre_filter:
+        books = books.filter(genre=genre_filter)
+
+    if author_filter:
+        books = books.filter(author=author_filter)
+
+    if status_filter:
+        books = books.filter(status=status_filter)
+
+    return render(request, 'book_list.html', {'books': books})

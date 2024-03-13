@@ -17,14 +17,3 @@ User = get_user_model()
 
 
 
-class Book(models.Model):
-    # Define your book fields here
-    title = models.CharField(max_length=100)
-    author = models.CharField(max_length=100)
-    genre = models.CharField(max_length=100)
-    status = models.CharField(max_length=100)
-    # Add other fields as necessary
-
-    def __str__(self):
-        return self.title
-  

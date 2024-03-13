@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login
-from .models import Book
+
 
 def register(request):
     msg=None
@@ -49,24 +49,5 @@ def home(request):
 
  
 
-def book_list_view(request):
-    books = Book.objects.all()
-    search_query = request.GET.get('q')
-    genre_filter = request.GET.get('genre')
-    author_filter = request.GET.get('author')
-    status_filter = request.GET.get('status')
 
-    if search_query:
-        books = books.filter(title__icontains=search_query)
-
-    if genre_filter:
-        books = books.filter(genre=genre_filter)
-
-    if author_filter:
-        books = books.filter(author=author_filter)
-
-    if status_filter:
-        books = books.filter(status=status_filter)
-
-    return render(request, 'book_list.html', {'books': books})
 
