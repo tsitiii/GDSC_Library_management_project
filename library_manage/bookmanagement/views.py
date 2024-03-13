@@ -26,7 +26,7 @@ def add_book(request):
             return redirect('bookmanagement:book_list')
     else:
         form = BookForm()
-    return render(request, 'bookmanagement/add_book.html', {'form': form})
+    return render(request, 'bookmanagement/AddBook.html', {'form': form})
 
 @login_required
 @admin_required
