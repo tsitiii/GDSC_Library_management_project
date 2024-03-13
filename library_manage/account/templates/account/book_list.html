@@ -1,0 +1,29 @@
+<h1>Available Books</h1>
+
+<form method="GET" action="{% url 'book_list' %}">
+    <input type="text" name="q" placeholder="Search books...">
+    <select name="genre">
+        <option value="">All Genres</option>
+        <option value="fiction">Fiction</option>
+        <option value="non-fiction">Non-Fiction</option>
+    </select>
+    <select name="author">
+        <option value="">All Authors</option>
+        <option value="author1">Author 1</option>
+        <option value="author2">Author 2</option>
+    </select>
+    <select name="status">
+        <option value="">All Statuses</option>
+        <option value="available">Available</option>
+        <option value="borrowed">Borrowed</option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+<ul>
+    {% for book in books %}
+        <li>{{ book.title }}</li>
+    {% empty %}
+        <li>No books available</li>
+    {% endfor %}
+</ul>
