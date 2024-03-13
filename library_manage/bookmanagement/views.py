@@ -39,7 +39,7 @@ def edit_book(request, pk):
             return redirect('bookmanagement:book_list')
     else:
         form = BookForm(instance=book)
-    return render(request, 'bookmanagement/edit_book.html', {'form': form})
+    return render(request, 'bookmanagement/editbook.html', {'form': form})
 
 @login_required
 @admin_required
@@ -48,4 +48,4 @@ def delete_book(request, pk):
     if request.method == 'POST':
         book.delete()
         return redirect('bookmanagement:book_list')
-    return render(request, 'bookmanagement/delete_book.html', {'book': book})
+    return render(request, 'bookmanagement/deletebook.html', {'book': book})
