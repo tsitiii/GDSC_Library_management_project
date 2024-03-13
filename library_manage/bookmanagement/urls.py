@@ -5,7 +5,7 @@ app_name = 'bookmanagement'
 
 urlpatterns = [
     path('booklist', book_list, name='book_list'),
-    path('add/', add_book, name='add_book'),
+    path('AddBook', add_book, name='add_book'),
     path('edit/<int:pk>/', edit_book, name='edit_book'),
     path('delete/<int:pk>/', delete_book, name='delete_book'),
 ]

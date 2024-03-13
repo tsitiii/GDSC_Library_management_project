@@ -16,17 +16,27 @@ def book_list(request):
     books = Book.objects.all()
     return render(request, 'bookmanagement/book_list.html', {'books': books})
 
-@login_required
-@admin_required
+# @login_required
+# @admin_required
 def add_book(request):
     if request.method == 'POST':
-        form = BookForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('bookmanagement:book_list')
-    else:
-        form = BookForm()
-    return render(request, 'bookmanagement/AddBook.html', {'form': form})
+        t = request.POST["title"]
+        a = request.POST["author"]
+        g = request.POST["genre"]
+        c = request.POST["cover"]
+        f = request.POST["file"]
+        
+        book = Book()
+        book.title = t
+        book.author = a
+        book.genre = g
+        book.book_cover = c
+        book.book_file = f
+        book.save()
+        
+        return redirect('bookmanagement:booklist')
+
+    return render(request, 'bookmanagement/AddBook.html')
 
 @login_required
 @admin_required
