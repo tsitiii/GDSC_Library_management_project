@@ -25,7 +25,7 @@
 
          <div class="containerr">
             <h2 style="text-decoration: none;"><a href="/">Book Management</a></h2>
-            <h2 style="text-decoration: none;"><a href="viewBook">Home</a></h2>
+            <h2 style="text-decoration: none;"><a href="book_list">Home</a></h2>
             <h2 style="text-decoration: none;"> <a href="/AddBook"> Add Books </a> </h2>
          </div> 
         
@@ -45,7 +45,7 @@
             <th scope="col">Action</th>
           </tr>
         </thead>
-        {% comment %} <tbody>
+        <tbody>
           {%for i in books%}
           <tr>
             <th scope="row">{{ forloop.counter }}</th>
@@ -59,7 +59,7 @@
           </tr>
           {% endfor %}
 
-        </tbody> {% endcomment %}
+        </tbody> 
       </table>
 </div>
 

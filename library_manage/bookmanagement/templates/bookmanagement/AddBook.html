@@ -32,7 +32,7 @@
     </style>
 
          <div class="containerr">
-            <h2 style="text-decoration: none;"><a href="viewBook">Home</a></h2>
+            <h2 style="text-decoration: none;"><a href="book_list">Home</a></h2>
             <h2 style="text-decoration: none;"> <a href="AddBook"> Add Books </a> </h2>
          </div> 
         
@@ -42,7 +42,7 @@
 
     <h1 mt-2>Add Book</h1> <br>
 
-    <form class="mt-3" action="AddBook/add" method="POST"> 
+    <form class="mt-3" action="booklist" method="POST"> 
         {% csrf_token %}
         <div class="form-group">
           <label for="title">Title</label>
@@ -56,10 +56,22 @@
         </div>
 
         <div class="form-group">
-          <label for="price">Price</label>
-          <input type="text" class="form-control" id="price" name="price" placeholder="enter price here">
+          <label for="author">Genre</label>
+          <input type="text" class="form-control" id="genre" name="genre" placeholder="enter genre here">
         </div>
 
+        <div class="form-group">
+          <label for="cover"> Book Cover</label>
+          <input type="file" class="form-control" id="cover" name=cover" placeholder="enterbook cover here" accept="image/*">
+        </div>
+       
+
+        <div class="form-group">
+          <label for="File"> Book pdf</label>
+          <input type="file" class="form-control" id="cover" name=File" placeholder="enterbook PDF here" accept=".PDF">
+        </div>
+
+       
 
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
