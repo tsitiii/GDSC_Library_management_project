@@ -118,9 +118,9 @@
           <td>{{ i.genre }}</td>
           <td>{{ i.status }}</td>
           <td>
-            <a href="editbook"><button type="button" class="btn btn-primary">Edit</button></a>
+            <a href="editbook?bookid={{i.id}}"><button type="button" class="btn btn-primary">Edit</button></a>
             &nbsp;
-            <a href="deletebook"><button type="button" class="btn btn-danger">Delete</button></a>
+            <a href="deletebook?bookid={{i.id}}"><button type="button" class="btn btn-danger">Delete</button></a>
           </td>
         </tr>
         {% endfor %}

@@ -41,19 +41,6 @@ def add_book(request):
 
     return render(request, 'bookmanagement/AddBook.html')
 
-# @login_required
-# @admin_required
-# def edit_book(request, pk):
-#     book = get_object_or_404(Book, pk=pk)
-#     if request.method == 'POST':
-#         form = BookForm(request.POST, instance=book)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('bookmanagement:booklist')
-#     else:
-#         form = BookForm(instance=book)
-#     return render(request, 'bookmanagement/editbook.html', {'form': form})
-
 
 @login_required(login_url='login')
 @admin_required
@@ -63,29 +50,35 @@ def edit_book(request):
         a= request.POST["author"]
         g = request.POST["genre"]
         s=request.POST["status"]
+        f=request.POST["File"]
+        c=request.POST['cover']
 
         book= Book.objects.get(id=request.POST['bookid'])
         book.title=t
         book.author=a
         book.genre = g
         book.status=s
+        book.book_file=f
+        book.book_cover=c
         book.save()
-        return redirect('bookmanagement:booklist')
+        return redirect('bookmanagement:book_list')
+    
+@login_required(login_url='login')
+@admin_required
 def editbookview(request):
-        # book=Book.objects.get(id=request.GET['bookid'])
-        # print(book)   
-        return render(request,'bookmanagement/editbook.html')
+        book=Book.objects.get(id=request.GET['bookid'])
+        print(book)   
+        return render(request,'bookmanagement/editbook.html',{'book':book})
 
 
 
 @login_required
 @admin_required
-def delete_book(request, pk):
-    book = get_object_or_404(Book, pk=pk)
-    if request.method == 'POST':
-        book.delete()
-        return redirect('bookmanagement:book_list')
-    return render(request, 'bookmanagement/deletebook.html', {'book': book})
+def delete_book(request):
+    book=Book.objects.get(id=request.GET['bookid'])
+    book.delete()
+    return redirect('bookmanagement:book_list')
+   
 
 
 
