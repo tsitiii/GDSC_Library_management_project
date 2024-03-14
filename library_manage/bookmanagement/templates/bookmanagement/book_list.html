@@ -106,6 +106,7 @@
           <th scope="col">Genre</th>
           <th scope="col">Status</th>
           <th scope="col">Action</th>
+          
         </tr>
       </thead>
       <tbody>
@@ -117,7 +118,7 @@
           <td>{{ i.genre }}</td>
           <td>{{ i.status }}</td>
           <td>
-            <a href="/books/editbook?bookid={{ i.id }}"><button type="button" class="btn btn-primary">Edit</button></a>
+            <a href="editbook"><button type="button" class="btn btn-primary">Edit</button></a>
             &nbsp;
             <a href="deletebook"><button type="button" class="btn btn-danger">Delete</button></a>
           </td>

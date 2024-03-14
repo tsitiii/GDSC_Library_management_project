@@ -88,7 +88,7 @@
         </ul>
         <ul>
           <li><a href="#" style="text-decoration: none; font-weight: bold; font-size: 18px;">Admin Profile</a></li>
-          <li><a href="logout/" style="text-decoration: none; font-weight: bold; font-size: 18px;">Logout</a></li>
+          <li><a href="{% url 'logout' %}" style="text-decoration: none; font-weight: bold; font-size: 18px;">Logout</a></li>
         </ul> {% endif %}
         </nav>
         </header>
@@ -99,10 +99,10 @@
 
     <h1 mt-2>Edit Book</h1> <br>
 
-    <form class="mt-4" action="/editbook/edit" method="POST">
+    <form class="mt-4" action="/" method="POST">
         {% csrf_token %}
         <div class="form-group">
-            <input type="hidden" name="bookid" value="={{book.id}}">
+          <input type="hidden" name="bookid" value="{{book.id}}">
           <label for="title">Title</label>
           <input type="text" class="form-control" id="title" name="title" placeholder="enter title here" value="{{book.title}}">
           <small id="titleHelp" class="form-text text-muted">we will try to find ur fav book here! </small>
@@ -114,12 +114,12 @@
         </div>
 
         <div class="form-group">
-          <label for="price">Price</label>
-          <input type="text" class="form-control" id="price" name="price" placeholder="enter price here" value="{{book.price}}">
+          <label for="genre">Genre</label>
+          <input type="text" class="form-control" id="genre" name="genre" placeholder="enter genre here" value="{{book.genre}}">
         </div>
         <div class="form-group">
             <label for="status ">Status</label>
-            <input type="text" class="form-control" id="status" name="status" placeholder="enter status here">
+            <input type="text" class="form-control" id="status" name="status" placeholder="enter status here" value="{{book.status}}">
           </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
