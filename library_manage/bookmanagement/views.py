@@ -26,6 +26,7 @@ def add_book(request):
         g = request.POST["genre"]
         c = request.POST["cover"]
         f = request.POST["file"]
+        r=request.POST['rating']
         
         book = Book()
         book.title = t
@@ -33,9 +34,10 @@ def add_book(request):
         book.genre = g
         book.book_cover = c
         book.book_file = f
+        book.ratings=r
         book.save()
         
-        return redirect('bookmanagement:booklist')
+        return redirect('bookmanagement:book_list')
 
     return render(request, 'bookmanagement/AddBook.html')
 
@@ -59,18 +61,20 @@ def edit_book(request):
     if request.method=='POST':
         t= request.POST["title"]
         a= request.POST["author"]
-        p=request.POST["price"]
+        g = request.POST["genre"]
         s=request.POST["status"]
 
         book= Book.objects.get(id=request.POST['bookid'])
         book.title=t
         book.author=a
-        book.price=p
+        book.genre = g
         book.status=s
         book.save()
         return redirect('bookmanagement:booklist')
-    
-    return render(request, 'bookmanagement/editbook.html')
+def editbookview(request):
+        # book=Book.objects.get(id=request.GET['bookid'])
+        # print(book)   
+        return render(request,'bookmanagement/editbook.html')
 
 
 

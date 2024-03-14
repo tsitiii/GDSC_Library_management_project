@@ -29,4 +29,4 @@ class Book(models.Model):
 
 
     def __str__(self):
-        return self.title + self.genre +self.author
+        return self.title 
