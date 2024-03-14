@@ -16,25 +16,82 @@
   </style>
 
 
-    <title>Hello, world!</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: burlywood;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .book {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .book img {
+      width: 100px;
+      height: 150px;
+      margin-right: 10px;
+    }
+    
+    .table {
+      margin-top: 20px;
+    }
+  </style>
+
+
+    <title>Edit Book</title>
   </head>
   <body>
    
-    <style>
-        .containerr{
-                display: inline-flex;
-                margin-top: 4rem;
-                margin-bottom: 2rem;
-        }
-        .containerr h2{
-            margin-left: 10rem;
-        }
-    </style>
-
-         <div class="containerr">
-            <h2 style="text-decoration: none;"><a href="viewBook">Home</a></h2>
-            <h2 style="text-decoration: none;"> <a href="AddBook"> Add Books </a> </h2>
-         </div> 
+    <header>
+      <nav>
+        <ul>
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'home' %}" style="text-decoration: none; font-weight: bold; font-size: 18px;">Home</a></li>
+          <li><a href="booklist" style="text-decoration: none; font-weight: bold; font-size: 18px;">Book Management</a></li>
+          <li><a href="AddBook" style="text-decoration: none; font-weight: bold; font-size: 18px;">Add Books</a></li>
+          <li><a href="#" style="text-decoration: none; font-weight: bold; font-size: 18px;">Borrowed Books</a></li>
+        </ul>
+        <ul>
+          <li><a href="#" style="text-decoration: none; font-weight: bold; font-size: 18px;">Admin Profile</a></li>
+          <li><a href="logout/" style="text-decoration: none; font-weight: bold; font-size: 18px;">Logout</a></li>
+        </ul> {% endif %}
+        </nav>
+        </header>
         
 
     

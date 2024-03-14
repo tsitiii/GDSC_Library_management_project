@@ -16,8 +16,9 @@ def book_list(request):
     books = Book.objects.all()
     return render(request, 'bookmanagement/book_list.html', {'books': books})
 
-# @login_required
-# @admin_required
+
+@login_required(login_url='login')
+@admin_required
 def add_book(request):
     if request.method == 'POST':
         t = request.POST["title"]
@@ -38,22 +39,23 @@ def add_book(request):
 
     return render(request, 'bookmanagement/AddBook.html')
 
-@login_required
+# @login_required
+# @admin_required
+# def edit_book(request, pk):
+#     book = get_object_or_404(Book, pk=pk)
+#     if request.method == 'POST':
+#         form = BookForm(request.POST, instance=book)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('bookmanagement:booklist')
+#     else:
+#         form = BookForm(instance=book)
+#     return render(request, 'bookmanagement/editbook.html', {'form': form})
+
+
+@login_required(login_url='login')
 @admin_required
-def edit_book(request, pk):
-    book = get_object_or_404(Book, pk=pk)
-    if request.method == 'POST':
-        form = BookForm(request.POST, instance=book)
-        if form.is_valid():
-            form.save()
-            return redirect('bookmanagement:book_list')
-    else:
-        form = BookForm(instance=book)
-    return render(request, 'bookmanagement/editbook.html', {'form': form})
-
-
-
-def editbook(request):
+def edit_book(request):
     if request.method=='POST':
         t= request.POST["title"]
         a= request.POST["author"]
@@ -66,7 +68,7 @@ def editbook(request):
         book.price=p
         book.status=s
         book.save()
-        return redirect('bookmanagement:book_list')
+        return redirect('bookmanagement:booklist')
     
     return render(request, 'bookmanagement/editbook.html')
 
