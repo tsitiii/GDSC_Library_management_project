@@ -60,7 +60,7 @@
         .cardd{
             margin: 1%;
             padding: 1%;
-            box-shadow: 0 0 10px rgb(93, 122, 133);
+            box-shadow: 0 0 10px rgb(124, 181, 204);
             border-radius: 5px;
             justify-content: center;
             transition: margin 0.3s ease;
@@ -96,7 +96,7 @@
           </ul>
           </div>
           </nav>
-    {% if searched %}
+    {% if searched and books %}
 
     <div class="container">
     
@@ -123,8 +123,19 @@
       {%endfor%}
     </div>
 
-    {% else %}
-    <h1>You Forgot to search</h1>
+    {% elif searched %}
+    <div class="container">
+        
+    <h1>{{ searched }} Book Not Found</h1>
+    <div class="card-link"><a href="/home">Back to Home</a></div>
+    </div>
+
+    {%else%}
+    <div class="container">
+        
+    <h1>You Didn't Search for Anything</h1>
+    <div class="card-link"><a href="/home">Back to Home</a></div>
+    </div>
 
     {% endif %}
 </div>
