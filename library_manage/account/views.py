@@ -44,6 +44,7 @@ def loginview(request):
             user=authenticate(username=Username, password=Password)
             
             if user is not None and user.is_student:
+                
                 login(request, user)
                 return redirect('home')
             elif user is not None and user.is_admin:
