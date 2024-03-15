@@ -12,7 +12,16 @@ def search(request):
         searched = request.POST["search"]
 
         books = Book.objects.filter(title__contains = searched)
-        return render(request, 'account/search.html', {"searched" : searched, "books" : books})
+        return render(request, 'account/search.html', {"searched" : searched, "books" : books, "by" : "title"})
+    
+    return render(request, 'account/search.html', {})
+
+def search_author(request):
+    if request.method == "POST": 
+        searched = request.POST["search_author"]
+
+        books = Book.objects.filter(author__contains = searched)
+        return render(request, 'account/search.html', {"searched" : searched, "books" : books, "by" : "author"})
     
     return render(request, 'account/search.html', {})
 

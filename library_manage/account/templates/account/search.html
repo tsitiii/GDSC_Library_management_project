@@ -99,8 +99,12 @@
     {% if searched and books %}
 
     <div class="container">
-    
+    {%if by == 'title'%}
     <h3>Hello You searched for {{searched}}</h3>
+    {%else%}
+    
+    <h3>{{searched}} Books</h3>
+    {%endif%}
     <div class="main">
     {% for book in books %}
     <div class="cardd" style="width: 18rem;">
@@ -126,7 +130,12 @@
     {% elif searched %}
     <div class="container">
         
-    <h1>{{ searched }} Book Not Found</h1>
+    {%if by == 'title'%}
+    <h3>{{searched}} Book Not Found</h3>
+    {%else%}
+    
+    <h3>{{searched}}: Author Not Found</h3>
+    {%endif%}
     <div class="card-link"><a href="/home">Back to Home</a></div>
     </div>
 
