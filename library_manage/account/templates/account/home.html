@@ -152,6 +152,23 @@
             }
         }
 
+        .buttons{
+          /* background-color:rgb(134, 206, 235); */
+          width: 150px;
+          box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+          padding: 1%;
+          
+        }
+
+        .group{
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap : 10px;
+          margin-top : 4%;
+          margin-bottom : 4%;
+        }
+
         
 
     </style>
@@ -231,15 +248,28 @@
 
         <h2 id = "books">Featured Books</h2>
 
-        <div class = 'mainn'>
+        <div class="container group">
+          <a href="{% url 'filtered_books' 'all' %}" class="btn btn-light buttons">All</a>
+          <a href="{% url 'filtered_books' 'Fictional' %}" class="btn btn-light buttons">Fictional</a>
+          <a href="{% url 'filtered_books' 'Educational' %}" class="btn btn-light buttons">Educational</a>
+          <a href="{% url 'filtered_books' 'Drama' %}" class="btn btn-light buttons">Drama</a>
+          <a href="{% url 'filtered_books' 'Non-Fictional' %}" class="btn btn-light buttons">Non-Fictional</a>
+          <a href="{% url 'filtered_books' 'Romance' %}" class="btn btn-light buttons">Romance</a>
+          <a href="{% url 'filtered_books' 'others' %}" class="btn btn-light buttons">Others</a>
+        </div>
           
+         
+
+
+        <div class = 'mainn'>       
+   
         
           {% for book in books %}
-
+          <!-- {{book.book_cover}} -->
           <div class="cardd" style="width: 18rem;">
            
             <div class="cardd-body">
-              <img src="{{ book.book_cover }}" width="250" height="200" />
+              <img src="{{book.book_cover}}" width="250" height="200" />
               <h5 class="cardd-title">{{ book.title }}</h5>
               <p class="cardd-text">Was a great story about a girl and her trauma.</p>
             </div>

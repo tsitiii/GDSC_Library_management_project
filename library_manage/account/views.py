@@ -16,6 +16,14 @@ def search(request):
     
     return render(request, 'account/search.html', {})
 
+def filtered_books(request, genre):
+    if genre == 'all':
+        books = Book.objects.all()
+    else:
+        books = Book.objects.filter(genre = genre)
+
+    return render(request,'account/home.html', {"books" : books} )
+
 def register(request):
     msg=None
     if request.method=='POST':
