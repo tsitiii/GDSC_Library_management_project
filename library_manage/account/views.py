@@ -1,7 +1,18 @@
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login
-from .models import Book
+# from .models import Book
+
+from bookmanagement.models import Book
+
+def search(request):
+    if request.method == "POST": 
+        searched = request.POST["search"]
+
+        books = Book.objects.filter(title__contains = searched)
+        return render(request, 'account/search.html', {"searched" : searched, "books" : books})
+    
+    return render(request, 'account/search.html', {})
 
 def register(request):
     msg=None
@@ -45,7 +56,8 @@ def index(request):
 
 
 def home(request):
-    return render(request, 'account/home.html')
+    books = Book.objects.all()
+    return render(request, 'account/home.html', {"books" : books})
 
  
 
@@ -68,5 +80,5 @@ def book_list_view(request):
     if status_filter:
         books = books.filter(status=status_filter)
 
-    return render(request, 'book_list.html', {'books': books})
+    return render(request, 'bookmanagement/book_list.html', {'books': books})
 

@@ -114,7 +114,7 @@
         }
 
         .cardd:hover {
-            margin-top: 0.2px;
+          margin-top: 0.2px;
         }
 
         .para {
@@ -181,17 +181,20 @@
           Sign Up
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'login' %}">Login</a>
-          <a class="dropdown-item" href="{% url 'register' %}">Register</a>
+          <a class="dropdown-item" href="/login">Login</a>
+          <a class="dropdown-item" href="/register">Register</a>
           <!-- <div class="dropdown-divider"></div> -->
          
         </div>
       </li>
     
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <form class="form-inline my-2 my-lg-0"  method = "POST" action = "{% url 'search-books' %}">
+      
+      {% csrf_token %}
+
+      <input class="form-control mr-sm-2" type="search" placeholder="Search Book" aria-label="Search" name = "search">
+      <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
 </nav>
@@ -209,8 +212,9 @@
         </nav> -->
     </header>
     <main>
+
+      <!-- <script src="responsive.js"></script> -->
         <h1>Welcome to Our Library!</h1>
-        
         
 
         <div class="para">
@@ -227,8 +231,8 @@
             Visit Our Library today and embark on a literary journey that will expand your horizons and ignite your imagination. We look forward to welcoming you and helping you discover the wonders that books have to offer.
 
             <b>Happy reading!</b>
+            
         </div>
-
             <div class = 'booksimage'>
                 {%load static %}
                 <img src="{% static 'books.png' %}" width="400" height="250" />
@@ -239,116 +243,31 @@
         <h2 id = "books">Featured Books</h2>
 
         <div class = 'mainn'>
+          
         
-        <div class="cardd" style="width: 18rem;">
+          {% for book in books %}
+
+          <div class="cardd" style="width: 18rem;">
            
             <div class="cardd-body">
-                {% load static %}<img src="{% static 'book1.jpeg' %}" width="250" height="200" />
-              <h5 class="cardd-title">November Nine</h5>
+              <img src="{{ book.book_cover }}" width="250" height="200" />
+              <h5 class="cardd-title">{{ book.title }}</h5>
               <p class="cardd-text">Was a great story about a girl and her trauma.</p>
             </div>
             <ul class="list-groupp">
-              <li class="list-groupp-item">Author Name: Colleen Hoover</li>
-              <li class="list-groupp-item">Number of Pages : 350</li>
-              <li class="list-groupp-item">Price : 300$</li>
+              <li class="list-groupp-item">Author Name: {{book.author}}</li>
+              <li class="list-groupp-item">Genre : {{ book.genre }}</li>
+              <li class="list-groupp-item">{{book.status}}</li>
             </ul>
             <div class="cardd-body links">
               <a href="#" class="cardd-link">Review Book</a>
               <a href="#" class="cardd-link">Borrow Book</a>
             </div>
           </div>
+
+          {%endfor%}
         
-          <div class="cardd" style="width: 18rem;">
-           
-            <div class="cardd-body">
-                {% load static %}<img src="{% static 'book1.jpeg' %}" width="250" height="200" />
-              <h5 class="cardd-title">November Nine</h5>
-              <p class="cardd-text">Was a great story about a girl and her trauma.</p>
-            </div>
-            <ul class="list-groupp">
-              <li class="list-groupp-item">Author Name: Colleen Hoover</li>
-              <li class="list-groupp-item">Number of Pages : 350</li>
-              <li class="list-groupp-item">Price : 300$</li>
-            </ul>
-            <div class="cardd-body links">
-              <a href="#" class="cardd-link">Review Book</a>
-              <a href="#" class="cardd-link">Borrow Book</a>
-            </div>
-          </div>
-
-          <div class="cardd" style="width: 18rem;">
-           
-            <div class="cardd-body">
-                {% load static %}<img src="{% static 'book2.jpg' %}" width="250" height="200" />
-              <h5 class="cardd-title">November Nine</h5>
-              <p class="cardd-text">Was a great story about a girl and her trauma.</p>
-            </div>
-            <ul class="list-groupp">
-              <li class="list-groupp-item">Author Name: Colleen Hoover</li>
-              <li class="list-groupp-item">Number of Pages : 350</li>
-              <li class="list-groupp-item">Price : 300$</li>
-            </ul>
-            <div class="cardd-body links">
-              <a href="#" class="cardd-link">Review Book</a>
-              <a href="#" class="cardd-link">Borrow Book</a>
-            </div>
-          </div>
-
-          <div class="cardd" style="width: 18rem;">
-           
-            <div class="cardd-body">
-                {% load static %}<img src="{% static 'book2.jpg' %}" width="250" height="200" />
-              <h5 class="cardd-title">November Nine</h5>
-              <p class="cardd-text">Was a great story about a girl and her trauma.</p>
-            </div>
-            <ul class="list-groupp">
-              <li class="list-groupp-item">Author Name: Colleen Hoover</li>
-              <li class="list-groupp-item">Number of Pages : 350</li>
-              <li class="list-groupp-item">Price : 300$</li>
-            </ul>
-            <div class="cardd-body links">
-              <a href="#" class="cardd-link">Review Book</a>
-              <a href="#" class="cardd-link">Borrow Book</a>
-            </div>
-          </div>
-
-          <div class="cardd" style="width: 18rem;">
-           
-            <div class="cardd-body">
-                {% load static %}<img src="{% static 'book2.jpg' %}" width="250" height="200" />
-              <h5 class="cardd-title">November Nine</h5>
-              <p class="cardd-text">Was a great story about a girl and her trauma.</p>
-            </div>
-            <ul class="list-groupp">
-              <li class="list-groupp-item">Author Name: Colleen Hoover</li>
-              <li class="list-groupp-item">Number of Pages : 350</li>
-              <li class="list-groupp-item">Price : 300$</li>
-            </ul>
-            <div class="cardd-body links">
-              <a href="#" class="cardd-link">Review Book</a>
-              <a href="#" class="cardd-link">Borrow Book</a>
-            </div>
-          </div>
-
-          <div class="cardd" style="width: 18rem;">
-           
-            <div class="cardd-body">
-                {% load static %}<img src="{% static 'book2.jpg' %}" width="250" height="200" />
-              <h5 class="cardd-title">November Nine</h5>
-              <p class="cardd-text">Was a great story about a girl and her trauma.</p>
-            </div>
-            <ul class="list-groupp">
-              <li class="list-groupp-item">Author Name: Colleen Hoover</li>
-              <li class="list-groupp-item">Number of Pages : 350</li>
-              <li class="list-groupp-item">Price : 300$</li>
-            </ul>
-            <div class="cardd-body links">
-              <a href="#" class="cardd-link">Review Book</a>
-              <a href="#" class="cardd-link">Borrow Book</a>
-            </div>
-          </div>
-
-    </div>
+      </div>
 
     <div class="contact">
         

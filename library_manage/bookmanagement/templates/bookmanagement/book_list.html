@@ -33,6 +33,7 @@
 <div class="container" >
    
       <h1 class="mt-2"> All Books</h1>
+      <!-- {{ books }} -->
 
       <table class="table">
         <thead class="thead-light">
@@ -46,6 +47,9 @@
           </tr>
         </thead>
         <tbody>
+
+
+          
           {%for i in books%}
           <tr>
             <th scope="row">{{ forloop.counter }}</th>
@@ -58,7 +62,7 @@
               <a href="deletebook"><button type="button" class="btn btn-danger">Delete</button></a></td>
           </tr>
           {% endfor %}
-
+<!-- <h1>gfvhdjgn</h1> -->
         </tbody> 
       </table>
 </div>

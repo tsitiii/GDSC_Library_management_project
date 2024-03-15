@@ -34,7 +34,7 @@ def add_book(request):
         book.book_file = f
         book.save()
         
-        return redirect('bookmanagement:booklist')
+        return redirect('/')
 
     return render(request, 'bookmanagement/AddBook.html')
 
