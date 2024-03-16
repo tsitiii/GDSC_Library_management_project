@@ -193,6 +193,7 @@
       <li class="nav-item">
         <a class="nav-link" href="#contact">Contact Us</a>
       </li>
+      {%if not user%}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Sign Up
@@ -204,6 +205,12 @@
          
         </div>
       </li>
+      {%else%}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'profile' %}">My Account</a>
+      </li>
+    
+      {%endif%}
     
     </ul>
 
@@ -216,7 +223,6 @@
     </form>
 
     &nbsp;
-
     <form class="form-inline my-2 my-lg-0"  method = "POST" action = "{% url 'search-books' %}">
       
       {% csrf_token %}
@@ -231,7 +237,8 @@
     <main>
 
       <!-- <script src="responsive.js"></script> -->
-        <h1>Welcome to Our Library!</h1>
+        <h1>Welcome to Our Library {{user}}!
+          </h1>
         
 
         <div class="para">
@@ -257,7 +264,7 @@
             
         </div>
 
-        <h2 id = "books">Featured Books</h2>
+         <h2 id = "books">Featured Books</h2>
 
         <div class="container group">
           <a href="{% url 'filtered_books' 'all' %}" class="btn btn-light buttons">All</a>
@@ -267,7 +274,7 @@
           <a href="{% url 'filtered_books' 'Non-Fictional' %}" class="btn btn-light buttons">Non-Fictional</a>
           <a href="{% url 'filtered_books' 'Romance' %}" class="btn btn-light buttons">Romance</a>
           <a href="{% url 'filtered_books' 'others' %}" class="btn btn-light buttons">Others</a>
-        </div>
+        </div> 
           
          
 
@@ -276,7 +283,7 @@
    
         
           {% for book in books %}
-          <!-- {{book.book_cover}} -->
+          {% if book.status == 'available' %}
           <div class="cardd" style="width: 18rem;">
            
             <div class="cardd-body">
@@ -291,9 +298,10 @@
             </ul>
             <div class="cardd-body links">
               <a href="#" class="cardd-link">Review Book</a>
-              <a href="#" class="cardd-link">Borrow Book</a>
+              <a href="" class="cardd-link">Borrow Book</a>
             </div>
           </div>
+          {%endif%}
 
           {%endfor%}
         
