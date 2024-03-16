@@ -1,0 +1,159 @@
+
+
+<html>
+<head>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        
+        .main{ 
+            display: flex;
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+        }
+        .main::-webkit-scrollbar {
+  display: none;
+}
+
+.cardd-link{
+            text-decoration: None;
+            border: #333 solid 1px;
+            padding: 2%;
+            border-radius: 5px;
+        }
+
+        .links{
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .list-groupp{
+            list-style: none;
+            padding: initial;
+            display: flex;
+            flex-direction:column;
+            justify-content: space-between;
+            row-gap: 2%;
+            padding: 2%;
+        }
+        .list-groupp-item{
+            padding-top: 2%;
+            padding-bottom: 2%;
+            border-radius: 10px;
+            /* background-color: aquamarine; */
+         }
+        .cardd-title{
+            text-align: center;
+            font-size: 32px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            padding: 0;
+            margin: 0;
+        }
+
+        .cardd-text{
+            padding-left: 2%;
+            font-size: 18px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .cardd{
+            margin: 1%;
+            padding: 1%;
+            box-shadow: 0 0 10px rgb(124, 181, 204);
+            border-radius: 5px;
+            justify-content: center;
+            transition: margin 0.3s ease;
+            text-decoration: none;
+        }
+
+        .cardd:hover {
+          margin-top: 0.2px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><strong>Library</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/home">Home </a>
+            </li>
+        
+              </div>
+            </li>
+          
+          </ul>
+          </div>
+          </nav>
+    {% if searched and books %}
+
+    <div class="container">
+    {%if by == 'title'%}
+    <h3>Hello You searched for {{searched}}</h3>
+    {%else%}
+    
+    <h3>{{searched}} Books</h3>
+    {%endif%}
+    <div class="main">
+    {% for book in books %}
+    <div class="cardd" style="width: 18rem;">
+           
+        <div class="cardd-body">
+          <img src="{{ book.book_cover }}" width="250" height="200" />
+          <h5 class="cardd-title">{{ book.title }}</h5>
+          <p class="cardd-text">Was a great story about a girl and her trauma.</p>
+        </div>
+        <ul class="list-groupp">
+          <li class="list-groupp-item">Author Name: {{book.author}}</li>
+          <li class="list-groupp-item">Genre : {{ book.genre }}</li>
+          <li class="list-groupp-item">{{book.status}}</li>
+        </ul>
+        <div class="cardd-body links">
+          <a href="#" class="cardd-link">Review Book</a>
+          <a href="#" class="cardd-link">Borrow Book</a>
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+
+    {% elif searched %}
+    <div class="container">
+        
+    {%if by == 'title'%}
+    <h3>{{searched}} Book Not Found</h3>
+    {%else%}
+    
+    <h3>{{searched}}: Author Not Found</h3>
+    {%endif%}
+    <div class="card-link"><a href="/home">Back to Home</a></div>
+    </div>
+
+    {%else%}
+    <div class="container">
+        
+    <h1>You Didn't Search for Anything</h1>
+    <div class="card-link"><a href="/home">Back to Home</a></div>
+    </div>
+
+    {% endif %}
+</div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

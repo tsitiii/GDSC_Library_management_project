@@ -2,7 +2,33 @@ from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
+from bookmanagement.models import Book
 
+def search(request):
+    if request.method == "POST": 
+        searched = request.POST["search"]
+
+        books = Book.objects.filter(title__contains = searched)
+        return render(request, 'account/search.html', {"searched" : searched, "books" : books, "by" : "title"})
+    
+    return render(request, 'account/search.html', {})
+
+def search_author(request):
+    if request.method == "POST": 
+        searched = request.POST["search_author"]
+
+        books = Book.objects.filter(author__contains = searched)
+        return render(request, 'account/search.html', {"searched" : searched, "books" : books, "by" : "author"})
+    
+    return render(request, 'account/search.html', {})
+
+def filtered_books(request, genre):
+    if genre == 'all':
+        books = Book.objects.all()
+    else:
+        books = Book.objects.filter(genre = genre)
+
+    return render(request,'account/home.html', {"books" : books} )
 
 def register(request):
     msg=None
@@ -30,19 +56,18 @@ def loginview(request):
             Username=form.cleaned_data.get('username')# retrivies the validated data of the username on the above method
             Password=form.cleaned_data.get('password')# retrivies the validated data of the username on the above method
             user=authenticate(username=Username, password=Password)
-            
-            if user is not None and user.is_admin:
-                login(request, user)
-                return redirect('bookmanagement:book_list')
 
-            elif user is not None and(user.is_super_admin or user.is_superuser) :
+            if user is not None and user.is_student:
                 login(request, user)
-                return redirect('bookmanagement:book_list')
-
-            elif user is not None:
-                login(request, user)
-                return redirect('bookmanagement:book_list')
+                return redirect('home')
             
+            elif user is not None and user.is_admin:
+                login(request, user)
+                return redirect('admin')
+            
+            if user is not None and user.is_super_admin:
+                login(request, user)
+                return redirect('bookmanagement:book_list')
             else:
                 msg="Invalid credentials!"
         else:
@@ -67,7 +92,8 @@ def index(request):
 
 
 def home(request):
-    return render(request, 'account/home.html')
+    books = Book.objects.all()
+    return render(request, 'account/home.html', {"books" : books})
 
  
 
