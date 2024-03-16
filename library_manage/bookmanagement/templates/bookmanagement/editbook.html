@@ -80,7 +80,7 @@
     <header>
       <nav>
         <ul>
-          {% if user.is_authenticated %}
+          
           <li><a href="{% url 'home' %}" style="text-decoration: none; font-weight: bold; font-size: 18px;">Home</a></li>
           <li><a href="{% url 'bookmanagement:book_list' %}" style="text-decoration: none; font-weight: bold; font-size: 18px;">Book Management</a></li>
           <li><a href="{% url 'bookmanagement:add_book' %}" style="text-decoration: none; font-weight: bold; font-size: 18px;">Add Books</a></li>
@@ -89,7 +89,7 @@
         <ul>
           <li><a href="#" style="text-decoration: none; font-weight: bold; font-size: 18px;">Admin Profile</a></li>
           <li><a href="{% url 'logout' %}" style="text-decoration: none; font-weight: bold; font-size: 18px;">Logout</a></li>
-        </ul> {% endif %}
+        </ul>
         </nav>
         </header>
         

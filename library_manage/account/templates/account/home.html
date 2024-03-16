@@ -283,7 +283,8 @@
    
         
           {% for book in books %}
-          {% if book.status == 'available' %}
+          <!-- {{book.book_cover}} -->
+          
           <div class="cardd" style="width: 18rem;">
            
             <div class="cardd-body">
@@ -297,11 +298,13 @@
               <li class="list-groupp-item">{{book.status}}</li>
             </ul>
             <div class="cardd-body links">
-              <a href="#" class="cardd-link">Review Book</a>
-              <a href="" class="cardd-link">Borrow Book</a>
+              <a href="{% url 'reviews:book_detail' book.title %}" class="cardd-link">Review Book</a>
+              {%if book.status == "available"%}
+              <a href="#" class="cardd-link">Borrow Book</a>              
+              {%endif%}
             </div>
           </div>
-          {%endif%}
+          
 
           {%endfor%}
         

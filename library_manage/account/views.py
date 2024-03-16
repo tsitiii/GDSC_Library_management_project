@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login,logout
-# from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 from borrowingmanagement.models import BorrowedBook
@@ -44,8 +43,10 @@ def register(request):
       form=SignUpForm(request.POST) # creating object for the SignUpForm class
       # now we can pass this obj to our template coz we inherited everything we need from the django default forms
       if form.is_valid():
+        # user = form.save(commit=False) # Get the user instance without saving to the database yet
         form.save()
         msg='user created'
+        # print("User data:", user.__dict__) #for  debugging purposes
         return redirect('login')
       else:
           msg='Form is invalid' 
@@ -60,24 +61,25 @@ def register(request):
 def loginview(request):
     form=LoginForm(request.POST)
     msg= None
-    
+        
     if request.method=='POST':
         if form.is_valid():
             Username=form.cleaned_data.get('username')# retrivies the validated data of the username on the above method
             Password=form.cleaned_data.get('password')# retrivies the validated data of the username on the above method
             user=authenticate(username=Username, password=Password)
-            
+
             if user is not None and user.is_student:
-                
                 login(request, user)
                 # flag = True
                 return redirect('home')
+            
             elif user is not None and user.is_admin:
                 login(request, user)
-                return redirect('admin')
-            if user is not None and user.is_super_admin:
-                login(request, user)
                 return redirect('bookmanagement:book_list')
+            
+            if user is not None and user.is_super_admin or user.is_superuser:
+                login(request, user)
+                return redirect('admin')
             else:
                 msg="Invalid credentials!"
         else:
@@ -94,7 +96,7 @@ def logoutform(request):
 
 @login_required(login_url='login')
 def admin(request):
-    return render(request, 'account/admin.html')
+    return redirect('admin/')
 
 
 def index(request):

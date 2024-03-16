@@ -29,11 +29,13 @@
     <style>
         .prof {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             margin : 5%;
             padding : 3%;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            gap : 20%;
+            flex-wrap: wrap;
             
         }
             
@@ -101,6 +103,12 @@ display: none;
   margin-top: 0.2px;
 }
 
+.container{
+  margin-top: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
     </style>
     <div class="container prof">
         {%load static%}
@@ -110,8 +118,10 @@ display: none;
     </div>
 
     <div class="container">
+      {%if books%}
     <h1>Borrowed Books</h1>
     <div class="main">
+     
         {% for book in books %}
         <div class="cardd" style="width: 18rem;">
            
@@ -126,11 +136,18 @@ display: none;
           <li class="list-groupp-item">{{book.status}}</li>
         </ul>
         <div class="cardd-body links">
-          <a href="#" class="cardd-link">Review Book</a>
+          <a href="{% url 'reviews:book_detail' book.title %}" class="cardd-link">Review Book</a>
           <a href="#" class="cardd-link">Borrow Book</a>
         </div>
         </div>
         {%endfor%}
+      {%else%}
+      <h1>No Book Borrowed
+          <a href="{% url 'home' %}"> Explore </a>
+
+      </h1>
+      {%endif%}
+
     </div>
     </div>
 
