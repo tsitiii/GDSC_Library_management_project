@@ -290,7 +290,7 @@
               <li class="list-groupp-item">{{book.status}}</li>
             </ul>
             <div class="cardd-body links">
-              <a href="#" class="cardd-link">Review Book</a>
+              <a href="{% url 'reviewsmanagement:book_detail' book.title %}" class="cardd-link">Review Book</a>
               <a href="#" class="cardd-link">Borrow Book</a>
             </div>
           </div>
