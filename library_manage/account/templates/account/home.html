@@ -291,8 +291,7 @@
             </ul>
             <div class="cardd-body links">
               <a href="#" class="cardd-link">Review Book</a>
-              <a href="#" class="cardd-link">Borrow Book</a>
-            </div>
+              <a href="{% url 'borrowingmanagement:borrow_book' book_id=book.id %}" class="cardd-link">Borrow Book</a>            </div>
           </div>
 
           {%endfor%}
@@ -303,6 +302,7 @@
         
         {% csrf_token %}
     <form id = "contact" class="container" method = 'POST'>
+      {% csrf_token %}
         <h1>Contact Us</h1>
         <div class="form-group">
           <label for="email">Email address</label>

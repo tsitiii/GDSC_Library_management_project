@@ -27,4 +27,4 @@ const greeting = (name) => {
     return greet
 }
 const welcome = document.getElementsByTagName('h1')[0]
-welcome.appendChild(greeting('Mihret'))
+welcome.appendChild(greeting('zion the mean😊🎉'))
