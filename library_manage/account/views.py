@@ -2,7 +2,12 @@ from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
+
+from borrowingmanagement.models import BorrowedBook
+
+
 from bookmanagement.models import Book
+from .models import User
 
 def search(request):
     if request.method == "POST": 
@@ -30,6 +35,8 @@ def filtered_books(request, genre):
 
     return render(request,'account/home.html', {"books" : books} )
 
+
+
 def register(request):
     msg=None
     if request.method=='POST':
@@ -50,9 +57,11 @@ def register(request):
 
 
 
+
 def loginview(request):
     form=LoginForm(request.POST)
     msg= None
+        
     if request.method=='POST':
         if form.is_valid():
             Username=form.cleaned_data.get('username')# retrivies the validated data of the username on the above method
@@ -61,6 +70,7 @@ def loginview(request):
 
             if user is not None and user.is_student:
                 login(request, user)
+                # flag = True
                 return redirect('home')
             
             elif user is not None and user.is_admin:
@@ -96,6 +106,19 @@ def index(request):
 def home(request):
     books = Book.objects.all()
     return render(request, 'account/home.html', {"books" : books})
+
+@login_required
+def profile(request):
+    user = request.user
+    borrowed = BorrowedBook.objects.filter(user = user)
+    books = []
+    for book in borrowed:
+        books.append(book.book)
+
+
+    return render(request, 'account/myaccount.html', {"user" : user, "books" : books})
+
+
 
  
 
