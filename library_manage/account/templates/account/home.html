@@ -193,24 +193,29 @@
       <li class="nav-item">
         <a class="nav-link" href="#contact">Contact Us</a>
       </li>
-      {%if not user%}
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Sign Up
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/login">Login</a>
-          <a class="dropdown-item" href="/register">Register</a>
-          <!-- <div class="dropdown-divider"></div> -->
-         
-        </div>
-      </li>
-      {%else%}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'profile' %}">My Account</a>
-      </li>
-    
-      {%endif%}
+      
+
+      {% if user.is_authenticated %}
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ user.username }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="nav-link" href="{% url 'profile' %}">My Account</a>
+                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+            </div>
+        </li>
+        {% else %}
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sign Up
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/login">Login</a>
+                <a class="dropdown-item" href="/register">Register</a>
+            </div>
+        </li>
+        {% endif %}
     
     </ul>
 
@@ -298,10 +303,10 @@
               <li class="list-groupp-item">{{book.status}}</li>
             </ul>
             <div class="cardd-body links">
-              <a href="{% url 'reviews:book_detail' book.title %}" class="cardd-link">Review Book</a>
               {%if book.status == "available"%}
-              <a href="#" class="cardd-link">Borrow Book</a>              
+              <a href="{% url 'borrowingmanagement:borrow_book' book_id=book.id %}" class="cardd-link">Borrow Book</a>
               {%endif%}
+              <a href="{% url 'reviewsmanagement:book_detail' book.title %}" class="cardd-link">Review Book</a>
             </div>
           </div>
           
@@ -314,6 +319,7 @@
         
         {% csrf_token %}
     <form id = "contact" class="container" method = 'POST'>
+      {% csrf_token %}
         <h1>Contact Us</h1>
         <div class="form-group">
           <label for="email">Email address</label>

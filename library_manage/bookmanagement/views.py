@@ -14,7 +14,8 @@ def admin_required(view_func):
             return redirect('login')  # Redirect to login page if not admin or super admin
     return wrapper
 
-# NO Login Required;
+@login_required(login_url='login')
+@admin_required
 def book_list(request):
     books = Book.objects.all()
     us=User.objects.all()

@@ -79,8 +79,6 @@
   <header>
     <nav>
       <ul>
-        
-        
         <li><a href="{% url 'home' %}" style="text-decoration: none; font-weight: bold; font-size: 18px;">Home</a></li>
         <li><a href="booklist" style="text-decoration: none; font-weight: bold; font-size: 18px;">Book Management</a></li>
         <li><a href="AddBook" style="text-decoration: none; font-weight: bold; font-size: 18px;">Add Books</a></li>
@@ -89,17 +87,7 @@
       <ul>
         <li><a href="#" style="text-decoration: none; font-weight: bold; font-size: 18px;">Admin Profile</a></li>
         <li><a href="{% url 'logout' %}" style="text-decoration: none; font-weight: bold; font-size: 18px;">Logout</a></li>
-      </ul>
-      
-      {% if user.is_authenticated %}
-      <ul>
-        <li><a href="{% url 'register' %}" style="text-decoration: none; font-weight: bold; font-size: 18px;">Register</a></li>
-        <li><a href="{% url 'login' %}" style="text-decoration: none; font-weight: bold; font-size: 18px;">Login</a></li>
-      </ul>
-      {% endif %}
-        
-      
-        
+      </ul>  
 
     </nav>
   </header>
@@ -115,8 +103,7 @@
           <th scope="col">Author</th>
           <th scope="col">Genre</th>
           <th scope="col">Status</th>
-          <th scope="col">Action</th>
-          
+        <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -128,11 +115,9 @@
           <td>{{ i.genre }}</td>
           <td>{{ i.status }}</td>
           <td>   
-            
             <a href="editbook?bookid={{i.id}}"><button type="button" class="btn btn-primary">Edit</button></a>
             &nbsp;
-            <a href="deletebook?bookid={{i.id}}"><button type="button" class="btn btn-danger">Delete</button></a>
-                     
+            <a href="deletebook?bookid={{i.id}}"><button type="button" class="btn btn-danger">Delete</button></a>      
           </td>
         </tr>
         {% endfor %}

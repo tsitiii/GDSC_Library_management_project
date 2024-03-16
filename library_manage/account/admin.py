@@ -3,6 +3,11 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib import admin
 from .models import User
+
+admin.site.site_header = 'Library Management System'
+admin.site.site_title = 'Library Management System'
+admin.site.index_title = 'Welcome to the Library Management System'
+
 class CustomUserAdmin(BaseUserAdmin):
     list_display = ['username', 'email', 'is_admin', 'is_student', 'is_super_admin']
     list_filter = ['is_admin', 'is_student', 'is_super_admin']
@@ -36,3 +41,4 @@ class CustomUserAdmin(BaseUserAdmin):
         return super().has_delete_permission(request, obj)
 
 admin.site.register(User, CustomUserAdmin)
+
