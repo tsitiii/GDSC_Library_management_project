@@ -89,19 +89,20 @@
   <header>
     <nav>
       <ul>
-        {% if user.is_authenticated %}
+        
+        
         <li><a href="{% url 'home' %}" style="text-decoration: none; font-weight: bold; font-size: 18px;">Home</a></li>
         <li><a href="booklist" style="text-decoration: none; font-weight: bold; font-size: 18px;">Book Management</a></li>
         <li><a href="AddBook" style="text-decoration: none; font-weight: bold; font-size: 18px;">Add Books</a></li>
-        <li><a href="#" style="text-decoration: none; font-weight: bold; font-size: 18px;">Borrowed Books</a></li>
+        <li><a href="Borrowed" style="text-decoration: none; font-weight: bold; font-size: 18px;">Borrowed Books</a></li>
       </ul>
       <ul>
         <li><a href="#" style="text-decoration: none; font-weight: bold; font-size: 18px;">Admin Profile</a></li>
         <li><a href="{% url 'logout' %}" style="text-decoration: none; font-weight: bold; font-size: 18px;">Logout</a></li>
       </ul>
-      </nav>
+      
       </header>
-     {% endif %}
+     
   <div class="container">
 
     <h1 class="mt-2">Add Book</h1> <br>

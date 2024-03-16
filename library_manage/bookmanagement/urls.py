@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import book_list, add_book, edit_book, editbookview, delete_book, book_list_view
+from .views import *
 
 app_name = 'bookmanagement'
 
@@ -9,5 +9,7 @@ urlpatterns = [
     path('editbook/', editbookview, name='editbook'),
     path('editbook/edit', edit_book),
     path('deletebook', delete_book, name='delete_book'),
+    path('Borrowed',borrowed, name='borrowed'),
+    path('ban',banstudent),
     path('searchBook', book_list_view)
 ] 

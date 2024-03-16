@@ -1,7 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Book
-from .forms import BookForm
+from account.models import User
+from borrowingmanagement.models import BorrowedBook
+from django.http import Http404
+from django.contrib import messages
 
 def admin_required(view_func):
     def wrapper(request, *args, **kwargs):
@@ -14,7 +17,9 @@ def admin_required(view_func):
 # NO Login Required;
 def book_list(request):
     books = Book.objects.all()
-    return render(request, 'bookmanagement/book_list.html', {'books': books})
+    us=User.objects.all()
+    context={'books':books, 'user':us}
+    return render(request, 'bookmanagement/book_list.html', context=context)
 
 
 @login_required(login_url='login')
@@ -102,3 +107,29 @@ def book_list_view(request):
         books = books.filter(status=status_filter)
 
     return render(request, 'book_list.html', {'books': books})
+
+
+def borrowed(request):
+    books=BorrowedBook.objects.all()
+    print(books)
+    return render(request, 'bookmanagement/borrowedbook.html', {'books':books})
+
+
+@login_required
+def banstudent(request):
+    if not request.user.is_super_admin:
+        raise Http404()  # Only super admins can access this view
+
+    if request.method == 'GET' and 'userid' in request.GET:
+        user_id = request.GET['userid']
+        try:
+            user = User.objects.get(id=user_id)
+            user.is_banned = True
+            user.save()
+            messages.success(request, 'Student banned successfully.')
+        except User.DoesNotExist:
+            messages.error(request, 'Invalid user ID.')
+    else:
+        messages.error(request, 'Invalid request.')
+    return redirect('bookmanagement:borrowed')
+

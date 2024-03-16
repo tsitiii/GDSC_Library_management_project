@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login,logout
-from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 
@@ -32,15 +31,18 @@ def loginview(request):
             Password=form.cleaned_data.get('password')# retrivies the validated data of the username on the above method
             user=authenticate(username=Username, password=Password)
             
-            if user is not None and user.is_student:
-                login(request, user)
-                return redirect('home')
-            elif user is not None and user.is_admin:
-                login(request, user)
-                return redirect('admin')
-            if user is not None and user.is_super_admin:
+            if user is not None and user.is_admin:
                 login(request, user)
                 return redirect('bookmanagement:book_list')
+
+            elif user is not None and(user.is_super_admin or user.is_superuser) :
+                login(request, user)
+                return redirect('bookmanagement:book_list')
+
+            elif user is not None:
+                login(request, user)
+                return redirect('bookmanagement:book_list')
+            
             else:
                 msg="Invalid credentials!"
         else:
@@ -57,7 +59,7 @@ def logoutform(request):
 
 @login_required(login_url='login')
 def admin(request):
-    return render(request, 'account/admin.html')
+    return render(request, 'account/home.html')
 
 
 def index(request):
