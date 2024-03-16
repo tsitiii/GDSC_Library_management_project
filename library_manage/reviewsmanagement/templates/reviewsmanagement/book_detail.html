@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ book.title }} - Book Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .book-info, .reviews, .add-review {
+            margin-bottom: 20px;
+        }
+        .book-info img {
+            max-width: 250px;
+            height: auto;
+        }
+        .reviews ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .reviews li {
+            margin-bottom: 20px;
+        }
+        .add-review form {
+            display: flex;
+            flex-direction: column;
+        }
+        .add-review form input[type="submit"] {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .add-review form input[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+        .edit-review, .delete-review {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .edit-review:hover, .delete-review:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ book.title }} - Book Details</h1>
+        
+        <!-- Display Book Information -->
+        <div class="book-info">
+            <h2>Book Information</h2>
+            <img src="{{ book.book_cover }}" alt="{{ book.title }} Cover">
+            <p><strong>Title:</strong> {{ book.title }}</p>
+            <p><strong>Author:</strong> {{ book.author }}</p>
+            <p><strong>Genre:</strong> {{ book.genre }}</p>
+            <p><strong>Status:</strong> {{ book.status }}</p>
+        </div>
+        
+        <!-- DisplayReviews -->
+        <div class="reviews">
+            <h2>Reviews</h2>
+            {% if reviews %}
+                <ul>
+                    {% for review in reviews %}
+                        <li>
+                            <p><strong>User:</strong> {{ review.user.username }}</p>
+                            <p><strong>Rating:</strong> {{ review.rating }}</p>
+                            <p><strong>Comment:</strong> {{ review.comment }}</p>
+                            <p><strong>Created at:</strong> {{ review.created_at }}</p>
+                            
+                            <!-- Edit Review Button -->
+                            {% if review.user == request.user %}
+                                <a href="{% url 'reviewsmanagement:edit_review' review.id %}" class="edit-review">Edit Review</a>
+                                <!-- Delete Review Form -->
+                                <form action="{% url 'reviewsmanagement:delete_review' review.id %}" method="post" class="delete-review-form">
+                                    {% csrf_token %}
+                                    <button type="submit" class="delete-review">Delete Review</button>
+                                </form>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No reviews yet.</p>
+            {% endif %}
+        </div>
+        
+        <!-- Add Review Form -->
+        <div class="add-review">
+            <h2>Add Review</h2>
+            <form action="{% url 'reviewsmanagement:book_detail' book.title %}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit Review">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
