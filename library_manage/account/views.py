@@ -67,7 +67,7 @@ def loginview(request):
                 login(request, user)
                 return redirect('bookmanagement:book_list')
             
-            if user is not None and user.is_super_admin:
+            if user is not None and user.is_super_admin or user.is_superuser:
                 login(request, user)
                 return redirect('admin')
             else:
