@@ -9,7 +9,7 @@ urlpatterns = [
     path('home', views.home, name='home'),
     path('Adminn', views.admin, name='admin'),
     path('search/', views.search, name = 'search-books'),    
-    path('search_author/', views.search_author, name = 'search-books'),    
+    path('search_author/', views.search_author, name = 'search-author'),    
     path('<str:genre>/', views.filtered_books, name='filtered_books'),
    
 ]
