@@ -9,8 +9,8 @@ admin.site.site_title = 'Library Management System'
 admin.site.index_title = 'Welcome to the Library Management System'
 
 class CustomUserAdmin(BaseUserAdmin):
-    list_display = ['username', 'email', 'is_admin', 'is_student', 'is_super_admin','is_banned']
-    list_filter = ['is_admin', 'is_student', 'is_super_admin']
+    list_display = ['username', 'email', 'is_admin', 'is_student', 'is_superuser','is_banned']
+    list_filter = ['is_admin', 'is_student', 'is_superuser']
     search_fields = ['username', 'email']
     actions = ['make_admin', 'make_student']
 
