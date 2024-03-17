@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 
 from borrowingmanagement.views import borrow_book
+from bookmanagement.urls import book_list
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -14,7 +15,8 @@ urlpatterns = [
     path('search_author/', views.search_author, name = 'search-author'),    
     path('filtered_books/<str:genre>/', views.filtered_books, name='filtered_books'),
     path('profile/', views.profile, name = "profile"), 
-    path('borrow/',borrow_book, name = 'borrow' )
+    path('borrow/',borrow_book, name = 'borrow' ),
+    path('books/',book_list, name = 'books' )
    
 ]
 

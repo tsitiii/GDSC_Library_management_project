@@ -193,8 +193,12 @@
       <li class="nav-item">
         <a class="nav-link" href="#contact">Contact Us</a>
       </li>
-      
+      {%if user.is_super_admin or user.is_admin%}
 
+      <li class="nav-item">
+        <a class="nav-link" href="{%url 'books' %}">Admin Page</a>
+      </li>
+      {%endif%}
       {% if user.is_authenticated %}
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
