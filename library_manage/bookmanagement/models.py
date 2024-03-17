@@ -12,7 +12,7 @@ class Book(models.Model):
         ('available', 'Available'),
         ('borrowed', 'Borrowed'),
     ]
-    status = models.CharField(max_length=20, choices=status_choices, default='Available')
+    status = models.CharField(max_length=20, choices=status_choices, default='available')
      
 
     def calculate_average_rating(self):

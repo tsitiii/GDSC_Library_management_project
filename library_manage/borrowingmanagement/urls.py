@@ -6,5 +6,5 @@ app_name = 'borrowingmanagement'
 urlpatterns = [
     path('borrow/<int:book_id>/', borrow_book, name='borrow_book'),
     path('profile',profile_view, name='profile_view'),
-    path('return/<int:book_id>/', return_book, name='return')
+    path('Return/<int:book_id>/', return_book, name='Return')
 ]

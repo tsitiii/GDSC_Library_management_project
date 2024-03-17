@@ -41,10 +41,12 @@ def profile_view(request):
         return  render(request, 'borrowingmanagement/borrowbook.html', {'borrowed_books':borrowed_books})
     
 def return_book(request, book_id):
+    
     borrowed_book=get_object_or_404(BorrowedBook, book_id=book_id, user=request.user)
     borrowed_book.book.status='available'
     borrowed_book.return_date=date.today()
-    borrowed_book.save()
+    
     borrowed_book.user.books_borrowed-=1
+    borrowed_book.save()
     borrowed_book.save()
     return redirect('profile')
