@@ -18,13 +18,17 @@ def borrow_book(request, book_id):
                 messages.success(request, 'Book borrowed successfully!')
                 return redirect('home')
             else:
+                messages.success(request, 'Book is already borrowed')
                 return redirect('borrowingmanagement:profile_view')
         else:
+            messages.success(request, 'You already borrowed 3 books.')
             return redirect('borrowingmanagement:profile_view')
     elif request.user.is_authenticated and request.user.is_banned:
+        messages.success(request, 'you are banned from borrowing books')
         return redirect('borrowingmanagement:profile_view')
 
     elif not(request.user.is_authenticated):
+       messages.success(request, 'You are not auhtorized to borrow books. Register and u will get access to it!')
        return redirect('borrowingmanagement:profile_view')
 
     return redirect('account:home') 
