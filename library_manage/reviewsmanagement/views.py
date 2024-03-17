@@ -25,6 +25,12 @@ def book_detail(request, book_title):
     else:
         form = ReviewForm()
 
+    # Round the average ratings to one decimal place
+    if average_rating is not None:
+        average_rating = round(average_rating, 1)
+    if overall_average_rating is not None:
+        overall_average_rating = round(overall_average_rating, 1)
+
     return render(request, 'reviewsmanagement/book_detail.html', {
         'book': book,
         'reviews': reviews,
