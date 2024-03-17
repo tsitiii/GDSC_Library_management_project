@@ -5,11 +5,14 @@ from .forms import ReviewForm
 from bookmanagement.models import Book
 from django.db.models import Avg
 
-#@login_required
+from django.db.models import Avg
+
+@login_required(login_url='login')
 def book_detail(request, book_title):
     book = get_object_or_404(Book, title=book_title)
     reviews = Review.objects.filter(book=book)
     average_rating = reviews.aggregate(Avg('rating'))['rating__avg']
+    overall_average_rating = Review.objects.filter(book=book).aggregate(Avg('rating'))['rating__avg']
 
     if request.method == 'POST':
         form = ReviewForm(request.POST)
@@ -26,10 +29,12 @@ def book_detail(request, book_title):
         'book': book,
         'reviews': reviews,
         'average_rating': average_rating,
+        'overall_average_rating': overall_average_rating,
         'form': form
     })
 
-#@login_required
+
+@login_required(login_url='login')
 def edit_review(request, review_id):
     review = get_object_or_404(Review, id=review_id)
     if request.method == 'POST':
@@ -44,7 +49,7 @@ def edit_review(request, review_id):
     
     return render(request, 'reviewsmanagement/book_detail.html', {'book': book, 'form': form})
 
-#@login_required
+@login_required(login_url='login')
 def delete_review(request, review_id):
     review = get_object_or_404(Review, id=review_id)
     if request.method == 'POST':

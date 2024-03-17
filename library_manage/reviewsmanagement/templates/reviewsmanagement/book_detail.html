@@ -97,12 +97,14 @@
         <!-- Display Book Information -->
         <div class=" card book-info">
             <h2>Book Information</h2>
-            <img src="{{ book.book_cover }}" alt="{{ book.title }} Cover" width = '250' height = '250'>
+            <img src="{{ book.book_cover }}" alt="{{ book.title }} Cover" width="250" height="250">
             <p><strong>Title:</strong> {{ book.title }}</p>
             <p><strong>Author:</strong> {{ book.author }}</p>
             <p><strong>Genre:</strong> {{ book.genre }}</p>
             <p><strong>Status:</strong> {{ book.status }}</p>
+            <p><strong>Average Rating:</strong>  {{ overall_average_rating }}</p>
         </div>
+        
         <!-- Add Review Form -->
         <div class="add-review card">
             <h2>Add Review</h2>
@@ -127,6 +129,7 @@
                             <p><strong>Rating:</strong> {{ review.rating }}</p>
                             <p><strong>Comment:</strong> {{ review.comment }}</p>
                             <p><strong>Created at:</strong> {{ review.created_at }}</p>
+                            
                         
                             
                             <!-- Edit Review Button -->
