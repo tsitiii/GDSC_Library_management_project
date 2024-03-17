@@ -335,10 +335,13 @@
           <TextArea class="form-control" name = "comment" placeholder="Enter Message" ></TextArea> 
           
         </div>
-        
-    
-        <button type="submit" class="btn btn-primary">Send</button>
+        <button type="submit" class="btn btn-primary" onclick="popup()">Send</button>
       </form>
+      <script>
+        function popup() {
+          alert(" Dear applicant your Result has been Recorded!");
+        }
+        </script>
     {%load static %}
     <img src = "{% static 'comments.jpg' %}" width = '400' height = '300' />
 
