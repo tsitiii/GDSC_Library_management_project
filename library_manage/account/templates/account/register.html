@@ -1,4 +1,3 @@
-i
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -11,9 +10,9 @@ i
     
 </head>
 <body>
-    <div class="form-container">
+  <div class="form-container">
         <h1 style="color: darkorange; text-align: center;">Register Form</h1>
-        <form method="post" action="{% url 'register' %}">
+        <form id="register-form" method="post" action="{% url 'register' %}">
             {% csrf_token %}
             <div class="form-group">
                 <label for="username">Username</label>
@@ -32,29 +31,41 @@ i
                 {{ form.password2 }}
             </div>
 
-            <div class="d-flex mb-5 align-items-center">
-                <label class="control control--checkbox mb-0"><span class="caption">Admin</span>
-                  <input type="radio" disabled name="check" value="{{ form.is_admin }}">
-                  <div class="control__indicator"></div>
+            <div class="form-group d-flex mb-5 align-items-center">
+                <label class="control control--checkbox mb-0">
+                    {{ form.is_student }}
+                    <div class="control__indicator"></div>
                 </label>
-              </div>
-              <div class="d-flex mb-5 align-items-center">
-                <label class="control control--checkbox mb-0"><span class="caption">super Admin</span>
-                  <input type="radio" disabled name="check"  value="{{ form.is_super_admin }}">
-                  <div class="control__indicator"></div>
-                </label>
-              </div>
-              <div class="d-flex mb-5 align-items-center">
-                <label class="control control--checkbox mb-0"><span class="caption">student</span>
-                  {{ form.is_student}}
-                  <div class="control__indicator"></div>
-                </label>
-              </div>
-                <span class="text-error">{{ form.errors }}</span>
-
-                <input type="submit"  value="Register" class="btn btn-pill text-white btn-block btn-primary">
-            </form>
+                <a href="{% url 'terms_and_conditions' %}" target="_blank">By signing up, you agree to our terms and conditions</a>
             </div>
-         <script src="{% static 'account/responsive.js' %}"></script>   
-    </body>
+
+            <span id="checkbox-error" class="text-error"></span> <!-- Error message for checkbox -->
+            <span class="text-error">{{ form.errors }}</span>
+            <input type="submit"  value="Register" class="btn btn-pill text-white btn-block btn-primary">
+        </form>
+    </div>
+
+<script src="{% static 'account/responsive.js' %}"></script>
+<script>
+    // Function to validate the form
+    function validateForm() {
+        var checkbox = document.getElementById('id_is_student');
+        var checkboxError = document.getElementById('checkbox-error');
+
+        if (!checkbox.checked) {
+            checkboxError.textContent = "You must agree to the terms and conditions.";
+            return false;
+        }
+
+        return true;
+    }
+
+    // Event listener for form submission
+    document.getElementById('register-form').addEventListener('submit', function(event) {
+        if (!validateForm()) {
+            event.preventDefault(); // Prevent form submission if validation fails
+        }
+    });
+</script>
+</body>
 </html>

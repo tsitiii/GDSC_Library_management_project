@@ -16,6 +16,7 @@ urlpatterns = [
     path('filtered_books/<str:genre>/', views.filtered_books, name='filtered_books'),
     path('profile/', views.profile, name = "profile"), 
     path('borrow/',borrow_book, name = 'borrow' ),
+    path('terms-and-conditions/', views.terms_and_conditions, name='terms_and_conditions'),
     path('books/',book_list, name = 'books' )
    
 ]
