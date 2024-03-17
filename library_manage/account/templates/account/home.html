@@ -309,9 +309,9 @@
               <li class="list-groupp-item">{{ book.status|default:""|upper }}</li>
             </ul>
             <div class="cardd-body links">
-              {%if book.status == "available"%}
+              {% comment %} {%if book.status == "available"%} {% endcomment %}
               <a href="{% url 'borrowingmanagement:borrow_book' book_id=book.id %}" class="cardd-link">Borrow Book</a>
-              {%endif%}
+              {% comment %} {%endif%} {% endcomment %}
               <a href="{% url 'reviewsmanagement:book_detail' book.title %}" class="cardd-link">Review Book</a>
             </div>
           </div>

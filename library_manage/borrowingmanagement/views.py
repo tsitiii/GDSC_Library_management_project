@@ -19,16 +19,18 @@ def borrow_book(request, book_id):
                 messages.success(request, 'Book borrowed successfully!')
                 return redirect('home')
             else:
-                messages.error(request, 'This book is not available for borrowing.')
+                return redirect('borrowingmanagement:profile_view')
         else:
-            messages.error(request, 'You have already borrowed the maximum number of books.')
+            return redirect('borrowingmanagement:profile_view')
     elif request.user.is_authenticated and request.user.is_banned:
-        messages.error(request, 'You are banned from borrowing books.')
-    else:
-        messages.error(request, 'You are not authorized to borrow books. Register and you will get access to it.')
+        return redirect('borrowingmanagement:profile_view')
 
-    return redirect('borrowingmanagement:profile_view') 
-@login_required(login_url='login')
+    elif not(request.user.is_authenticated):
+       return redirect('borrowingmanagement:profile_view')
+
+    return redirect('account:home') 
+
+
 def profile_view(request):
         user = request.user
         borrowed_books = user.borrowedbook_set.all()

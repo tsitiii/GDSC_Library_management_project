@@ -8,32 +8,32 @@
 </head>
 <body>
     <header>
-        <h1>User Profile</h1>
+        <h1>User actions</h1>
         <nav>
             <a href="{% url 'home' %}">Home</a>
         </nav>
     </header>
     <main>
-        <h2>Books You borrowed So far 🎉🎉🎉</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Genre</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Iterate over the user's borrowed books and display them -->
-                {% for book in borrowed_books %}
-                <tr>
-                    <td>{{ book.title }}</td>
-                    <td>{{ book.author }}</td>
-                    <td>{{ book.genre }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <h2>Hell dear user we are sorry to find you here😔😔😔😔 <br> But read the following carefully and your issue will be fixed ✨✨✨🎉🎉🎉</h2>
+        <h1>You are here because of the following reason.</h1>
     </main>
+<div class="container" style="border: 2px solid #ccc;">
+    <ol>
+        <li>
+            <h2>This book is not available for borrowing.</h2> 
+        </li>
+        <li>
+            <h2>You have already borrowed the maximum number of books. Maximum number of books u can borrow is 3.</h2>
+        </li>
+        <li>
+            <h2>You are not authorized to borrow books. Register and you will get access to it.</h2>
+        </li>
+        <li>
+            <h2>If the above are not your case, You are banned from borrowing books. Talk to your Admin</h2>
+        </li>
+    </ol>
+</div>
+      <p style="text-align: center; font-size: x-large;"><b><a href="{% url 'home' %}" style="color:darkorchid; " >Go back home</a> </b></p>
+      {% comment %} <a href="{% url 'Profile/' %}">Got to your Profile</a> {% endcomment %}
 </body>
 </html>

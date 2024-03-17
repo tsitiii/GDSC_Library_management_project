@@ -119,8 +119,8 @@ def borrowed(request):
 @login_required
 def banstudent(request):
     if not request.user.is_super_admin:
-        raise Http404()  # Only super admins can access this view
-
+        # raise Http404()  # Only super admins can access this view
+        messages.error(request, 'u are not authorized to ban student.')
     if request.method == 'GET' and 'userid' in request.GET:
         user_id = request.GET['userid']
         try:
