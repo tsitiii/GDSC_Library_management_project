@@ -133,11 +133,11 @@ display: none;
         <ul class="list-groupp">
           <li class="list-groupp-item">Author Name: {{book.author}}</li>
           <li class="list-groupp-item">Genre : {{ book.genre }}</li>
-          <li class="list-groupp-item">{{book.status}}</li>
+          <li class="list-groupp-item">{{ book.status|default:""|upper }}</li>
         </ul>
         <div class="cardd-body links">
           <a href="{% url 'reviews:book_detail' book.title %}" class="cardd-link">Review Book</a>
-          <a href="#" class="cardd-link">Borrow Book</a>
+          <!-- <a href="#" class="cardd-link">Borrow Book</a> -->
         </div>
         </div>
         {%endfor%}

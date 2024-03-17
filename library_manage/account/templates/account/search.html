@@ -117,11 +117,13 @@
         <ul class="list-groupp">
           <li class="list-groupp-item">Author Name: {{book.author}}</li>
           <li class="list-groupp-item">Genre : {{ book.genre }}</li>
-          <li class="list-groupp-item">{{book.status}}</li>
+          <li class="list-groupp-item">{{ book.status|default:""|upper }}</li>
         </ul>
         <div class="cardd-body links">
-          <a href="#" class="cardd-link">Review Book</a>
-          <a href="#" class="cardd-link">Borrow Book</a>
+          {%if book.status == "available"%}
+          <a href="{% url 'borrowingmanagement:borrow_book' book_id=book.id %}" class="cardd-link">Borrow Book</a>
+          {%endif%}
+          <a href="{% url 'reviewsmanagement:book_detail' book.title %}" class="cardd-link">Review Book</a>
         </div>
       </div>
       {%endfor%}

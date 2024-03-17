@@ -41,6 +41,7 @@ def edit_review(request, review_id):
         form = ReviewForm(instance=review)
     # Get the book associated with the review
     book = review.book
+    
     return render(request, 'reviewsmanagement/book_detail.html', {'book': book, 'form': form})
 
 #@login_required

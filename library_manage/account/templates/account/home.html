@@ -246,7 +246,7 @@
     <main>
 
       <!-- <script src="responsive.js"></script> -->
-        <h1>Welcome to Our Library {{user}}!
+        <h1>Welcome to Our Library {{user|default:""|upper }}!
           </h1>
         
 
@@ -289,7 +289,9 @@
 
 
         <div class = 'mainn'>       
-   
+          {%if not books%}
+          <h2>No Books Yet</h2>
+          {%endif%}
         
           {% for book in books %}
           <!-- {{book.book_cover}} -->
@@ -304,7 +306,7 @@
             <ul class="list-groupp">
               <li class="list-groupp-item">Author Name: {{book.author}}</li>
               <li class="list-groupp-item">Genre : {{ book.genre }}</li>
-              <li class="list-groupp-item">{{book.status}}</li>
+              <li class="list-groupp-item">{{ book.status|default:""|upper }}</li>
             </ul>
             <div class="cardd-body links">
               {%if book.status == "available"%}
