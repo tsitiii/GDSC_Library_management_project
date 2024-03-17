@@ -10,7 +10,7 @@ class User(AbstractUser):
     email=models.EmailField(unique=True)
     username=models.CharField(max_length=150, unique=True)
 
-    books_borrowed=models.PositiveIntegerField(null=True, default = "")
+    books_borrowed=models.PositiveIntegerField(null=True, default = 0)
     is_banned=models.BooleanField(default=False, null=True)
 
     EMAIL_FIELD = 'email'
