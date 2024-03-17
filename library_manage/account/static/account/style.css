@@ -12,8 +12,10 @@ body {
 .form-container {
     background-color: #fff;
     padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(151, 70, 70, 0.1);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .form-group {

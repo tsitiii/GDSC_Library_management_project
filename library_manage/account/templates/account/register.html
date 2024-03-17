@@ -32,40 +32,22 @@
             </div>
 
             <div class="form-group d-flex mb-5 align-items-center">
-                <label class="control control--checkbox mb-0">
+                <label class="control control--checkbox mb-0"> Student
                     {{ form.is_student }}
-                    <div class="control__indicator"></div>
-                </label>
-                <a href="{% url 'terms_and_conditions' %}" target="_blank">By signing up, you agree to our terms and conditions</a>
+                    <div class="control__indicator"></div> 
+                </label>                  
+                <input type="checkbox">
+                <a href="{% url 'terms_and_conditions' %}" target="_blank" style="text-decoration: none; color: cadetblue; font-size: larger;">By signing up, you agree to our terms and conditions</a>
             </div>
 
             <span id="checkbox-error" class="text-error"></span> <!-- Error message for checkbox -->
             <span class="text-error">{{ form.errors }}</span>
             <input type="submit"  value="Register" class="btn btn-pill text-white btn-block btn-primary">
+            <p>Already have an account? <b> <a href="login" style="text-decoration: none; color:#2196F3;">Login</a> </b></p>
+
         </form>
     </div>
 
 <script src="{% static 'account/responsive.js' %}"></script>
-<script>
-    // Function to validate the form
-    function validateForm() {
-        var checkbox = document.getElementById('id_is_student');
-        var checkboxError = document.getElementById('checkbox-error');
-
-        if (!checkbox.checked) {
-            checkboxError.textContent = "You must agree to the terms and conditions.";
-            return false;
-        }
-
-        return true;
-    }
-
-    // Event listener for form submission
-    document.getElementById('register-form').addEventListener('submit', function(event) {
-        if (!validateForm()) {
-            event.preventDefault(); // Prevent form submission if validation fails
-        }
-    });
-</script>
 </body>
 </html>

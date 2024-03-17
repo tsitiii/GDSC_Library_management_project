@@ -28,3 +28,22 @@ const greeting = (name) => {
 }
 const welcome = document.getElementsByTagName('h1')[0]
 welcome.appendChild(greeting('zion the mean😊🎉'))
+
+function validateForm() {
+    var checkbox = document.getElementById('id_is_student');
+    var checkboxError = document.getElementById('checkbox-error');
+
+    if (!checkbox.checked) {
+        checkboxError.textContent = "You must agree to the terms and conditions.";
+        return false;
+    }
+
+    return true;
+}
+
+// Event listener for form submission
+document.getElementById('register-form').addEventListener('submit', function(event) {
+    if (!validateForm()) {
+        event.preventDefault(); // Prevent form submission if validation fails
+    }
+});
