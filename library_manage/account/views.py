@@ -55,7 +55,8 @@ def register(request):
 
     return render(request, 'account/register.html', {'form': form, 'msg': msg})
 
-
+def terms_and_conditions(request):
+    return render(request, 'account/terms_and_conditions.html')
 
 
 def loginview(request):
