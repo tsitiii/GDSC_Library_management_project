@@ -1,5 +1,3 @@
-
-
 const form = document.querySelector('form');
 form.addEventListener('submit', (event) => {
     
@@ -17,17 +15,6 @@ form.addEventListener('submit', (event) => {
     }
 
 });
-
-const greeting = (name) => {
-
-    console.log("hello")
-
-    const greet = document.createElement('div');
-    greet.textContent = `Hello ${name} !!!`
-    return greet
-}
-const welcome = document.getElementsByTagName('h1')[0]
-welcome.appendChild(greeting('zion the mean😊🎉'))
 
 function validateForm() {
     var checkbox = document.getElementById('id_is_student');
