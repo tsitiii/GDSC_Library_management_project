@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'account/style.css' %}">
+  
+    <title>Register page</title>
+    
+</head>
+<body>
+  <div class="form-container">
+        <h1 style="color: darkorange; text-align: center;">Register Form</h1>
+        <form id="register-form" method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                {{ form.password1 }}
+            </div>
+            <div class="form-group">
+                <label for="password">Confirm Password</label>
+                {{ form.password2 }}
+            </div>
+
+            <div class="form-group d-flex mb-5 align-items-center">
+                <label class="control control--checkbox mb-0"> Student
+                    {{ form.is_student }}
+                    <div class="control__indicator"></div> 
+                </label>                  
+                <input type="checkbox">
+                <a href="{% url 'terms_and_conditions' %}" target="_blank" style="text-decoration: none; color: cadetblue; font-size: larger;">By signing up, you agree to our terms and conditions</a>
+            </div>
+
+            <span id="checkbox-error" class="text-error"></span> <!-- Error message for checkbox -->
+            <span class="text-error">{{ form.errors }}</span>
+            <input type="submit"  value="Register" class="btn btn-pill text-white btn-block btn-primary">
+            <p>Already have an account? <b> <a href="login" style="text-decoration: none; color:#2196F3;">Login</a> </b></p>
+
+        </form>
+    </div>
+
+<script src="{% static 'account/responsive.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Website</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    header {
+      background-color: #333;
+      padding: 10px;
+      color: #fff;
+    }
+    
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    
+    nav ul li {
+      float: left;
+    }
+    
+    nav ul li a {
+      display: block;
+      color: #fff;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    
+    nav ul li a:hover {
+      background-color: #555;
+    }
+    
+    .content {
+      margin: 20px;
+    }
+    
+    .button-container {
+      margin-top: 20px;
+      
+    }
+    
+    .button-container a {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <div class="content">
+    <h1>Welcome to Django Library </h1>
+    <p>Hello dear user We are delighted to have you here. Whether you are an avid 
+      reader or just starting your reading journey,<br> our library is the perfect place for you.</p>
+    <p>To make the most of your experience, we kindly invite you to register or log in. By doing so,
+       you will unlock the full potential of our library, 
+     <br> gaining access to our vast collection and personalized features <b style="color:blueviolet">for free!</b></p>
+    <div class="button-container">
+      <a href="{% url 'register' %}">Register</a>
+      <a href="{% url 'login' %}">Login</a>
+    </div>
+  </div>
+</body>
+</html>
