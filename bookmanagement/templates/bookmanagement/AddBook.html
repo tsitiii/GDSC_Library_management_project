@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<title>Add | Book</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: burlywood;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .book {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .book img {
+      width: 100px;
+      height: 150px;
+      margin-right: 10px;
+    }
+    
+    .table {
+      margin-top: 20px;
+    }
+  </style>
+
+
+  <style>
+    .forms {
+      margin-left: 20rem;
+    }
+
+    .containerr {
+      display: inline-flex;
+      margin-top: 4rem;
+      margin-bottom: 2rem;
+    }
+
+    .containerr h2 {
+      margin-left: 10rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        
+        
+      
+          
+        <li><a href="{% url 'home' %}" style="text-decoration: none; font-weight: bold; font-size: 18px;">Home</a></li>
+        <li><a href="booklist" style="text-decoration: none; font-weight: bold; font-size: 18px;">Book Management</a></li>
+        <li><a href="AddBook" style="text-decoration: none; font-weight: bold; font-size: 18px;">Add Books</a></li>
+        <li><a href="Borrowed" style="text-decoration: none; font-weight: bold; font-size: 18px;">Borrowed Books</a></li>
+      </ul>
+      <ul>
+        <li><a href="#" style="text-decoration: none; font-weight: bold; font-size: 18px;">Admin Profile</a></li>
+        <li><a href="{% url 'logout' %}" style="text-decoration: none; font-weight: bold; font-size: 18px;">Logout</a></li>
+      </ul>
+      
+      </header>
+     
+  <div class="container">
+
+    <h1 class="mt-2">Add Book</h1> <br>
+
+    <form class="mt-3" action="AddBook" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="enter title here">
+        <small id="titleHelp" class="form-text text-muted">we will try to find your favorite book here!</small>
+      </div>
+      <div class="form-group">
+        <label for="author">Author</label>
+        <input type="text" class="form-control" id="author" name="author" placeholder="enter author here">
+      </div>
+
+      <div class="form-group">
+        <label for="author">Genre</label>
+        <input type="text" class="form-control" id="genre" name="genre" placeholder="enter genre here">
+      </div>
+
+      <div class="form-group">
+        <label for="cover">Book Cover</label>
+        <input type="file" class="form-control" id="cover" name="cover" placeholder="enter book cover here"
+          accept="image/*">
+      </div>
+
+      <div class="form-group">
+        <label for="File">Book PDF</label>
+        <input type="file" class="form-control" id="file" name="file" placeholder="enter book PDF here"
+          accept=".PDF">
+      </div>
+
+      <div class="form-group">
+        <label for="rating">Ratings</label>
+        <input type="number" class="form-control" id="rating" name="rating" placeholder="enter your personal rating here"
+        min="1" max="10">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <br>
+
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
