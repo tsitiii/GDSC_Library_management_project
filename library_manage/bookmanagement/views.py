@@ -8,7 +8,7 @@ from django.contrib import messages
 
 def admin_required(view_func):
     def wrapper(request, *args, **kwargs):
-        if request.user.is_authenticated and (request.user.is_superuser or request.user.is_staff):
+        if request.user.is_authenticated and (request.user.is_superuser or request.user.is_admin):
             return view_func(request, *args, **kwargs)
         else:
             return redirect('login')  # Redirect to login page if not admin or super admin
@@ -19,7 +19,7 @@ def admin_required(view_func):
 def book_list(request):
     books = Book.objects.all()
     us=User.objects.all()
-    context={'books':books, 'user':us}
+    context={'books':books}
     return render(request, 'bookmanagement/book_list.html', context=context)
 
 
@@ -118,8 +118,8 @@ def borrowed(request):
 
 @login_required
 def banstudent(request):
-    if not request.user.is_super_admin:
-        # raise Http404()  # Only super admins can access this view
+
+    if not request.user.is_superuser:
         messages.error(request, 'u are not authorized to ban student.')
     if request.method == 'GET' and 'userid' in request.GET:
         user_id = request.GET['userid']

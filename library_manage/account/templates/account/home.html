@@ -4,6 +4,7 @@
 
     <title>Library Management System</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+     <link rel="stylesheet" href="#">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -233,12 +234,11 @@
 
     &nbsp;
     <form class="form-inline my-2 my-lg-0"  method = "POST" action = "{% url 'search-books' %}">
-      
       {% csrf_token %}
-
       <input class="form-control mr-sm-2" type="search" placeholder="Search Book" aria-label="Search" name = "search">
       <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
     </form>
+    
   </div>
 </nav>
        
@@ -282,7 +282,7 @@
           <a href="{% url 'filtered_books' 'Drama' %}" class="btn btn-light buttons">Drama</a>
           <a href="{% url 'filtered_books' 'Non-Fictional' %}" class="btn btn-light buttons">Non-Fictional</a>
           <a href="{% url 'filtered_books' 'Romance' %}" class="btn btn-light buttons">Romance</a>
-          <a href="{% url 'filtered_books' 'others' %}" class="btn btn-light buttons">Others</a>
+          <a href="{% url 'status_filter' %}" class="btn btn-light buttons">Only Available</a>
         </div> 
           
          
@@ -309,10 +309,12 @@
               <li class="list-groupp-item">{{ book.status|default:""|upper }}</li>
             </ul>
             <div class="cardd-body links">
-              {% comment %} {%if book.status == "available"%} {% endcomment %}
+              {%if book.status == "available"%}
               <a href="{% url 'borrowingmanagement:borrow_book' book_id=book.id %}" class="cardd-link">Borrow Book</a>
-              {% comment %} {%endif%} {% endcomment %}
-              <a href="{% url 'reviewsmanagement:book_detail' book.title %}" class="cardd-link">Review Book</a>
+              {%endif%}
+               {% comment %} <a href="{% url 'reviewsmanagement:book_detail' book.title %}" class="cardd-link">Review Book</a> {% endcomment %}
+              
+                
             </div>
           </div>
           
@@ -339,7 +341,7 @@
       </form>
       <script>
         function popup() {
-          alert(" Dear applicant your Result has been Recorded!");
+          alert(" Dear applicant your Response has been Recorded!");
         }
         </script>
     {%load static %}

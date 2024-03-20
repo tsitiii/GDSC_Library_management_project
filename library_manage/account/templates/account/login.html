@@ -16,8 +16,8 @@
         .form-container {
             background-color: #fff;
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0.5, 0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -72,7 +72,7 @@
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
             <div class="form-field">
-                <label for="{{ form.username.id_for_label }}">Username:</label>
+                <label for="{{ form.username.id_for_label }}">Username:</label> <!--the id_for_label creates unique id for the input field of the ussername and assign it to its id part coz label and input are connected with thier id-->
                 {{ form.username }}
             </div>
             <div class="form-field">
@@ -80,6 +80,9 @@
                 {{ form.password }}
             </div>
             <button type="submit">Login</button>
+            {% if msg %}
+           <p>{{ msg }}</p>
+            {% endif %}
         </form>
         <p>Don't have an account? <b><a href="{% url 'register' %}" style="text-decoration:none; color:#2196F3;">Register here</a></p>
     </div>

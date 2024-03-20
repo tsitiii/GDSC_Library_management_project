@@ -123,15 +123,19 @@
                   <td>{{ i.user }}</td>
                   <td>
                     {% if user.is_superuser %}
-                      <a href="ban?userid={{ i.user.id }}"><button type="button" class="btn btn-danger">Ban Student</button></a>
+                      <a href="ban?userid={{ i.user.id }}"><button type="button"  class="btn btn-warning">Ban Student</button></a>
                     {% endif %}
                   </td>
                 </tr>
               {% endfor %} 
             </tbody>
-            
           </table>
     </table>
+    <p>
+    {% if msg %}
+      msg
+    {% endif %}
+      </p>
   </div>
 
 

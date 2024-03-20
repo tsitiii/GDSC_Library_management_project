@@ -24,12 +24,6 @@ class CustomUserAdmin(BaseUserAdmin):
 
     make_student.short_description = "Make selected user/users student"
 
-    #def save_model(self, request, obj, form, change):
-    #    if not obj.pk:
-    #        obj.password = make_password(form.cleaned_data['password'])
-    #    obj.save()
-
-    # Customize admin view permissions based on user roles
     def has_change_permission(self, request, obj=None):
         if obj and obj.is_superuser:
             return False  # Super admins can't be edited

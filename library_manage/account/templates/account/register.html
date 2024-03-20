@@ -5,7 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'account/style.css' %}">
-  
+    <style>
+        input[type="submit"]:hover {
+          background-color: #FF0000;
+          color: #FFFFFF;
+        }
+        </style>
     <title>Register page</title>
     
 </head>
@@ -16,32 +21,30 @@
             {% csrf_token %}
             <div class="form-group">
                 <label for="username">Username</label>
-                {{ form.username }}
+                {{ Form.username }}
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                {{ form.email }}
+                {{ Form.email }}
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                {{ form.password1 }}
+                {{ Form.password1 }}
             </div>
             <div class="form-group">
                 <label for="password">Confirm Password</label>
-                {{ form.password2 }}
+                {{ Form.password2 }}
             </div>
 
             <div style="display:flex" class="form-group d-flex mb-5 align-items-center">
                 <label class="control control--checkbox mb-0">
-                    {{ form.is_student }}
-                    <div class="control__indicator"></div>
+                    {{ Form.is_student }}
+                    <span id="checkbox-error" class="text-error"></span> <!-- Error message for checkbox -->
+                    <span class="text-error">{{ Form.errors }}</span> <!--displays error message for above-->
+                    <span>I have read and agreed to <a href="{% url 'terms_and_conditions' %}" target="_blank" style="text-decoration: none; color: cadetblue;">terms and conditions</a></span>
                 </label>
-                <span>I have read and agreed to <a href="{% url 'terms_and_conditions' %}" target="_blank" style="text-decoration: none; color: cadetblue;">terms and conditions</a></span>
             </div>
-
-            <span id="checkbox-error" class="text-error"></span> <!-- Error message for checkbox -->
-            <span class="text-error">{{ form.errors }}</span>
-            <input type="submit"  value="Register" class="btn btn-pill text-white btn-block btn-primary">
+            <input type="submit"  value="Register" style="font-size: x-large; font-weight: lighter; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; ">
             <p style="text-align:center">Already have an account? <b> <a href="login" style="text-decoration: none; color:#FF8201;">Login</a> </b></p>
 
         </form>

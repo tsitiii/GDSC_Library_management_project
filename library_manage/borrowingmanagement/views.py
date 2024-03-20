@@ -21,14 +21,14 @@ def borrow_book(request, book_id):
                 messages.error(request, 'Book is not avialable!')
                 return redirect('borrowingmanagement:profile_view')
         else:
-            messages.error(request, 'u borrowed max book')
+            messages.error(request, 'You borrowed max book')
             return redirect('borrowingmanagement:profile_view')
     elif request.user.is_authenticated and request.user.is_banned:
-        messages.error(request, 'you aint student go back!')
+        messages.error(request, 'Sorry u are banned!')
         return redirect('borrowingmanagement:profile_view')
 
     elif not(request.user.is_authenticated):
-       messages.error(request, 'sorry u are banned!')
+       messages.error(request, "you ain't student go back!")
        return redirect('borrowingmanagement:profile_view')
 
     return redirect('home') 
@@ -45,8 +45,7 @@ def return_book(request, book_id):
     borrowed_book=get_object_or_404(BorrowedBook, book_id=book_id, user=request.user)
     borrowed_book.book.status='available'
     borrowed_book.return_date=date.today()
-    
     borrowed_book.user.books_borrowed-=1
     borrowed_book.save()
-    borrowed_book.save()
+
     return redirect('profile')
