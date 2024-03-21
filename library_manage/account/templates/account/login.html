@@ -10,14 +10,17 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f1f1f1;
+            {% comment %} background-color: #f1f1f1; {% endcomment %}
+            background-image: linear-gradient(rgba(27, 25, 26, 0.8), rgba(13, 38, 65, 0.5)), url('../static/bookcollection.jpg');
+            background-size: cover;
+            background-position: center;
         }
         
         .form-container {
             background-color: #fff;
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0.5, 0.1);
+            box-shadow: 20px 20px 20px rgba(7, 45, 96, 0.8);
             display: flex;
             flex-direction: column;
             align-items: center;

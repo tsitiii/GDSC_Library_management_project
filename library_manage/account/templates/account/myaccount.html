@@ -8,7 +8,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><strong>Library</strong></a>
+        <a class="navbar-brand" href="/home"><strong><i class="fa-solid fa-book"></i>Library</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -102,12 +102,17 @@ display: none;
 .cardd:hover {
   margin-top: 0.2px;
 }
-
+.cardd-body img{
+  width:100%;
+  margin-bottom:10px;
+ }
 .container{
   margin-top: 5%;
   margin-left: 10%;
   margin-right: 10%;
+  background:#fafafa;
 }
+
 
     </style>
     <div class="container prof">
@@ -128,7 +133,7 @@ display: none;
         <div class="cardd-body">
           <img src="/media/{{ book.book_cover }}" width="250" height="200" />
           <h5 class="cardd-title">{{ book.title }}</h5>
-          <p class="cardd-text">Was a great story about a girl and her trauma.</p>
+          
         </div>
         <ul class="list-groupp">
           <li class="list-groupp-item">Author Name: {{book.author}}</li>
@@ -156,7 +161,7 @@ display: none;
 
 
 
-
+<script src="https://kit.fontawesome.com/4dc0af90fd.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -6,9 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'account/style.css' %}">
     <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            {% comment %} background-color: #f1f1f1; {% endcomment %}
+            background-image: linear-gradient(rgba(27, 25, 26, 0.8), rgba(13, 38, 65, 0.5)), url('../static/bookcollection.jpg');
+            background-size: cover;
+            background-position: center;
+        }
         input[type="submit"]:hover {
           background-color: #FF0000;
           color: #FFFFFF;
+        }
+        .form-container{
+            box-shadow: 3px 5px 10px rgba(229, 125, 16, 0.8);
         }
         </style>
     <title>Register page</title>

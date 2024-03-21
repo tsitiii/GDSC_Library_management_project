@@ -298,7 +298,7 @@
     <main>
       <section class="openingsection">
       
-        {% if now.hour >= 5 and now.hour < 12 %}
+        {% if now.hour >= 6 and now.hour < 12 %}
         <h1>Good morning, {% if user %}{{ user|title }}{% else %}Guest{% endif %}!</h1>
         {% elif now.hour >= 12 and now.hour < 18 %}
         <h1>Good afternoon, {% if user %}{{ user|title }}{% else %}Guest{% endif %}!</h1>

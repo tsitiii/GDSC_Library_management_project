@@ -7,77 +7,147 @@
       font-family: Arial, sans-serif;
     }
     
-    header {
-      background-color: #333;
-      padding: 10px;
-      color: #fff;
+    .header {
+      width:80%;
+      margin:auto;
+      padding: 50px;
+      display:flex;
+      justify-content:space-between;
     }
-    
-    nav ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-    
-    nav ul li {
-      float: left;
-    }
-    
-    nav ul li a {
-      display: block;
-      color: #fff;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-    }
-    
-    nav ul li a:hover {
-      background-color: #555;
-    }
-    
-    .content {
-      margin: 20px;
-    }
-    
-    .button-container {
-      margin-top: 20px;
+    .logo a{
+      font-size:30px;
+      text-decoration:none;
+      color:black;
       
     }
-    
-    .button-container a {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: #fff;
-      text-decoration: none;
-      margin-right: 10px;
+    .fa-book{
+      margin-right:10px;
     }
+    .loginBtn{
+      text-decoration:none;
+      font-size:20px;
+      color:black;
+      margin-right:60px;
+    }
+    .loginBtn:hover{
+      color:red;
+    }
+    .registerBtn{
+      text-decoration:none;
+      font-size:20px;
+      color:black;
+      border: 3px solid red;
+      border-radius:20px;
+      padding:10px 20px;
+    }
+    .registerBtn:hover{
+      background:red;
+      color:white;
+    }
+    .info{
+
+      margin:auto;
+      padding-left:40px;
+      display: flex;
+      justify-content: space-around;
+      column-gap: 3%;
+      width:80%;
+      
+      
+
+      @media (max-width : 700px) {
+          flex-direction: column;
+          row-gap: 3%;
+      }
+    }
+    .booksimage{
+      width:100%;
+      
+    }
+    .text{
+      margin-top:90px;
+      width:75%;
+      font-size: 55px;
+      font-family: 'Times New Roman', Times, serif;
+      padding-left:30px;
+      color:black;
+  }
+  .text span{
+    margin-top:50px;
+    float:right;
+    font-size:30px;
+  }
+    .booksimage img{
+      width:100%;
+      height:70%;
+    }
+    .submission{
+      width:80%;
+      margin:auto;
+      margin-top:80px;
+    }
+    .submission .loginBtn{
+      border: 3px solid red;
+      border-radius:20px;
+      padding:20px 50px;
+      background:red;
+      color:white;
+      
+    }
+    .submission .loginBtn:hover{
+      background:white;
+      color:black;
+    }
+    .submission .registerBtn{
+      border: 3px solid red;
+      border-radius:20px;
+      padding:20px 50px;
+      
+    }
+    .footer{
+      text-align:center;
+    }
+    
+
+
   </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-  
-  <div class="content">
-    <h1>Welcome to Django Library </h1>
-    <p>Hello dear user We are delighted to have you here. Whether you are an avid 
-      reader or just starting your reading journey,<br> our library is the perfect place for you.</p>
-    <p>To make the most of your experience, we kindly invite you to register or log in. By doing so,
-       you will unlock the full potential of our library, 
-     <br> gaining access to our vast collection and personalized features <b style="color:blueviolet">for free!</b></p>
-    <div class="button-container">
-      <a href="{% url 'register' %}">Register</a>
-      <a href="{% url 'login' %}">Login</a>
+  <div class="header">
+    <div class="logo"><a  href="#"><strong><i class="fa-solid fa-book"></i>Library</strong></a></div>
+    <div>
+      <a class="loginBtn" href="{% url 'login' %}">Log In</a>
+      <a class="registerBtn" href="{% url 'register' %}">Register</a>
+      
     </div>
   </div>
+  <div class="info">
+            
+
+    <div class = 'text'> "Libraries are the cornerstone of democracy, where information is free and equally accessible to all."
+      <span>David Horowitz</span>
+     <b class="reading"></b>
+     <div class="submission">
+      <a class="loginBtn" href="{% url 'register' %}">Get Started</a>
+      <a class="registerBtn" href="{% url 'login' %}">Discover</a>
+      
+    </div>
+     
+ </div>
+    <div class = 'booksimage'>
+      {%load static %}
+      <img  src="{% static 'book_landing.png' %}" width="400" height="250" />
+  </div>
+  </div>
+
+  <div class="footer">
+    <p>More the <b>23,0000 books </b> waiting to be discovered</p>
+  </div>
+    
+    
+  </div>
+
+
+  <script src="https://kit.fontawesome.com/4dc0af90fd.js" crossorigin="anonymous"></script>
 </body>
 </html>

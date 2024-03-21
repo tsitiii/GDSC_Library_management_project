@@ -70,11 +70,16 @@
             flex-direction: row;
             gap : 3%;
         }
+        .book-info img{
+            width:100%;
+            margin-bottom:10px;
+            margin-left:20px;
+           }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><strong>Library</strong></a>
+        <a class="navbar-brand" href="/home"><strong><i class="fa-solid fa-book">Library</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -95,7 +100,7 @@
         <h1>{{ book.title }} - Book Details</h1>
         <div class="main">
         <!-- Display Book Information -->
-        <div class=" card book-info">
+        <div class="card book-info">
             <h2>Book Information</h2>
             <img src="/media/{{ book.book_cover }}" alt="{{ book.title }} Cover" width="250" height="250">
             <p><strong>Title:</strong> {{ book.title }}</p>
@@ -155,7 +160,7 @@
         
         
     </div>
-    
+    <script src="https://kit.fontawesome.com/4dc0af90fd.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
