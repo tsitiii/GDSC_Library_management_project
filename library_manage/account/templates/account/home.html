@@ -297,9 +297,15 @@
     </header>
     <main>
       <section class="openingsection">
-      <!-- <script src="responsive.js"></script> -->
-        <h1>Welcome to Our Library {{user|default:""|upper }}!
-          </h1>
+      
+        {% if now.hour >= 5 and now.hour < 12 %}
+        <h1>Good morning, {% if user %}{{ user|title }}{% else %}Guest{% endif %}!</h1>
+        {% elif now.hour >= 12 and now.hour < 18 %}
+        <h1>Good afternoon, {% if user %}{{ user|title }}{% else %}Guest{% endif %}!</h1>
+    {% else %}
+        <h1>Good evening, {% if user %}{{ user|title }}{% else %}Guest{% endif %}!</h1>
+    {% endif %}
+    
         
 
         <div class="para">

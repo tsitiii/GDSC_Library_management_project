@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login,logout
@@ -65,7 +66,9 @@ def logoutform(request):
 @login_required(login_url='login')
 def admin(request):
     return redirect('admin/')
-
+def home(request):
+    now = datetime.now()
+    return render(request, 'account/home.html', {'now': now})
 
 def index(request):
     return render(request,'account/index.html' )

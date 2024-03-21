@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'bookmanagement.apps.BookmanagementConfig',
     'borrowingmanagement.apps.BorrowingmanagementConfig',
     'reviewsmanagement.apps.ReviewsmanagementConfig',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
