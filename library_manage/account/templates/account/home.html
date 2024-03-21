@@ -5,9 +5,13 @@
     <title>Library Management System</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
      <link rel="stylesheet" href="#">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Poppins", sans-serif;
             margin: 0;
             padding: 0;
         }
@@ -20,7 +24,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            
+            padding: 15px 20px;
+            box-shadow:1px 2px 5px  rgba(3, 19, 37,0.5);
+            background:rgba(3, 0, 0, 0.8);
         }
         
         nav ul {
@@ -35,12 +41,30 @@
         }
         
         main {
-            padding: 20px;
+            padding: 0px;
             
+            
+        }
+        .openingsection{
+          background-image: linear-gradient(rgba(27, 25, 26, 0.8), rgba(13, 38, 65, 0.5)), url('../static/bookcollection.jpg');
+          background-size: cover;
+          background-position: center;
+          padding-top:80px;
+          height:81vh;
+          margin-bottom:40px;
         }
         
         h1 {
-            color: #333;
+            color:white;
+            font-family: "Cabin Sketch", sans-serif;
+            padding-left:30px;
+            
+            font-size:60px;
+        }
+        h2{
+          color: #333;
+          font-family: "Cabin Sketch", sans-serif;
+          text-align:center;
         }
         
         .book {
@@ -119,10 +143,14 @@
         }
 
         .para {
-            padding: 2%;
+            padding-left:40px;
             display: flex;
             justify-content: space-around;
             column-gap: 3%;
+            height:70vh;
+            width:100%;
+            
+            
 
             @media (max-width : 700px) {
                 flex-direction: column;
@@ -130,8 +158,12 @@
             }
         }
         .text{
-            font-size: 18px;
+            margin-top:90px;
+            width:60%;
+            font-size: 60px;
             font-family: 'Times New Roman', Times, serif;
+            padding-left:30px;
+            color:white;
         }
         /* .booksimage img{
             @media (max-width : 700px) {
@@ -139,6 +171,16 @@
                 height: 400;
             }
         } */
+        .booksimage{
+          width:100%;
+          height:90vh;
+          opacity:0.9;
+          
+        }
+        .booksimage img{
+          width:100%;
+          height:70%;
+        }
         .contact{
             margin : 3%;
             /* border: #333 solid 1px; */
@@ -168,17 +210,18 @@
           gap : 10px;
           margin-top : 4%;
           margin-bottom : 4%;
-        }
+        }   
+        .reading{
+          color:lightblue;
 
-        
-
+        }  
     </style>
     
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#"><strong>Library</strong></a>
+        <nav class="navbar navbar-expand-lg  navbar-light bg-light">
+  <a class="navbar-brand" href="#"><strong><i class="fa-solid fa-book"></i>Library</strong></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -229,14 +272,14 @@
       {% csrf_token %}
 
       <input class="form-control mr-sm-2" type="search" placeholder="Search by Author Name" aria-label="Search" name = "search_author">
-      <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-primary my-2 my-sm-0" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
 
     &nbsp;
     <form class="form-inline my-2 my-lg-0"  method = "POST" action = "{% url 'search-books' %}">
       {% csrf_token %}
       <input class="form-control mr-sm-2" type="search" placeholder="Search Book" aria-label="Search" name = "search">
-      <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-primary my-2 my-sm-0 srchbtn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
     
   </div>
@@ -244,7 +287,7 @@
        
     </header>
     <main>
-
+      <section class="openingsection">
       <!-- <script src="responsive.js"></script> -->
         <h1>Welcome to Our Library {{user|default:""|upper }}!
           </h1>
@@ -253,26 +296,18 @@
         <div class="para">
             
 
-           <div class = 'text'> At Our Library, we are dedicated to providing a wide range of books and resources to satisfy your reading interests. Whether you're searching for a captivating novel, an informative non-fiction book, or any other genre that piques your curiosity, we're here to help you find what you're looking for.
+           <div class = 'text'> Find the book you're looking for easier to read.
 
-            Our mission is to create an environment where you can explore, learn, and discover the joy of reading. Our collection spans various subjects, from timeless classics to contemporary bestsellers, ensuring that there's something for everyone.
-
-            With our user-friendly search feature, you can easily navigate through our catalog and locate the books that catch your attention. We strive to keep our collection up to date, continuously adding new titles to ensure a fresh and diverse selection.
-
-            Our dedicated team is passionate about books and is ready to assist you in finding the perfect read. Whether you need recommendations, assistance with locating a specific title, or any other inquiries, we are here to provide you with exceptional service and support.
-
-            Visit Our Library today and embark on a literary journey that will expand your horizons and ignite your imagination. We look forward to welcoming you and helping you discover the wonders that books have to offer.
-
-            <b>Happy reading!</b>
+            <b class="reading">Happy reading!</b>
             
         </div>
             <div class = 'booksimage'>
                 {%load static %}
-                <img src="{% static 'books.png' %}" width="400" height="250" />
+                <img  src="{% static 'books_pre.png' %}" width="400" height="250" />
             </div>
             
         </div>
-
+      </section>
          <h2 id = "books">Featured Books</h2>
 
         <div class="container group">
@@ -349,8 +384,8 @@
 
     </div>
     </main>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://kit.fontawesome.com/4dc0af90fd.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
