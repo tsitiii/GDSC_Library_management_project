@@ -15,10 +15,7 @@
             margin: 0;
             padding: 0;
         }
-        
-        header {
-            color: #fff;
-        }
+
         
         nav {
             display: flex;
@@ -52,6 +49,7 @@
           padding-top:80px;
           height:81vh;
           margin-bottom:40px;
+          padding-left:50px;
         }
         
         h1 {
@@ -80,12 +78,15 @@
         }
 
         .mainn{ 
+            width:80%;
+            margin:auto;
             display: flex;
             overflow-x: scroll;
             scroll-snap-type: x mandatory;
+            
         }
         .mainn::-webkit-scrollbar {
-  display: none;
+          display: none;
 }
 
         .cardd-link{
@@ -114,6 +115,10 @@
             padding-bottom: 2%;
             border-radius: 10px;
             /* background-color: aquamarine; */
+         }
+         .cardd-body img{
+          width:100%;
+          margin-bottom:10px;
          }
         .cardd-title{
             text-align: center;
@@ -183,10 +188,14 @@
         }
         .contact{
             margin : 3%;
+            background-image: linear-gradient(rgba(27, 25, 26, 0.9), rgba(13, 38, 65, 0.9)), url('../static/bookcollection.jpg');
+            background-size: cover;
+            background-position: center;
             /* border: #333 solid 1px; */
             padding: 5%;
             border-radius: 8px;
             display: flex;
+            color:white;
             
             box-shadow: 0 0 10px rgb(134, 206, 235);
             @media (max-width : 700px) {
@@ -214,13 +223,13 @@
         .reading{
           color:lightblue;
 
-        }  
+        } 
     </style>
     
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg  navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark">
   <a class="navbar-brand" href="#"><strong><i class="fa-solid fa-book"></i>Library</strong></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -249,7 +258,7 @@
                 {{ user.username }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="nav-link" href="{% url 'profile' %}">My Account</a>
+              <a style="color:black" class="nav-link" href="{% url 'profile' %}">My Account</a>
                 <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
             </div>
         </li>
@@ -311,13 +320,13 @@
          <h2 id = "books">Featured Books</h2>
 
         <div class="container group">
-          <a href="{% url 'filtered_books' 'all' %}" class="btn btn-light buttons">All</a>
-          <a href="{% url 'filtered_books' 'Fictional' %}" class="btn btn-light buttons">Fictional</a>
-          <a href="{% url 'filtered_books' 'Educational' %}" class="btn btn-light buttons">Educational</a>
-          <a href="{% url 'filtered_books' 'Drama' %}" class="btn btn-light buttons">Drama</a>
-          <a href="{% url 'filtered_books' 'Non-Fictional' %}" class="btn btn-light buttons">Non-Fictional</a>
-          <a href="{% url 'filtered_books' 'Romance' %}" class="btn btn-light buttons">Romance</a>
-          <a href="{% url 'status_filter' %}" class="btn btn-light buttons">Only Available</a>
+          <a href="{% url 'filtered_books' 'all' %}" class="btn btn-outline-secondary buttons">All</a>
+          <a href="{% url 'filtered_books' 'Fictional' %}" class="btn btn-outline-secondary buttons">Fictional</a>
+          <a href="{% url 'filtered_books' 'Educational' %}" class="btn btn-outline-secondary buttons">Educational</a>
+          <a href="{% url 'filtered_books' 'Drama' %}" class="btn btn-outline-secondary buttons">Drama</a>
+          <a href="{% url 'filtered_books' 'Non-Fictional' %}" class="btn btn-outline-secondary buttons">Non-Fictional</a>
+          <a href="{% url 'filtered_books' 'Romance' %}" class="btn btn-outline-secondary buttons">Romance</a>
+          <a href="{% url 'status_filter' %}" class="btn btn-outline-secondary buttons">Only Available</a>
         </div> 
           
          
@@ -325,23 +334,29 @@
 
         <div class = 'mainn'>       
           {%if not books%}
-          <h2>No Books Yet</h2>
+          <h2 style="text-align:center">No Books Yet</h2>
           {%endif%}
         
           {% for book in books %}
           <!-- {{book.book_cover}} -->
           
-          <div class="cardd" style="width: 18rem;">
+          <div class="cardd" style="width: 17rem;">
            
             <div class="cardd-body">
               <img src="/media/{{book.book_cover}}" width="250" height="200" />
               <h5 class="cardd-title">{{ book.title }}</h5>
-              <p class="cardd-text">Was a great story about a girl and her trauma.</p>
             </div>
             <ul class="list-groupp">
               <li class="list-groupp-item">Author Name: {{book.author}}</li>
               <li class="list-groupp-item">Genre : {{ book.genre }}</li>
-              <li class="list-groupp-item">{{ book.status|default:""|upper }}</li>
+              {% if book.status|default:""|upper == "AVAILABLE" %}
+              <li style="color: green;" class="list-groupp-item">{{ book.status|default:""|upper }}</li>
+              {% elif book.status|default:""|upper == "BORROWED" %}
+                  <li style="color: red;" class="list-groupp-item">{{ book.status|default:""|upper }}</li>
+              {% else %}
+                  <li class="list-groupp-item">{{ book.status|default:""|upper }}</li>
+              {% endif %}
+
             </ul>
             <div class="cardd-body links">
               {%if book.status == "available"%}
