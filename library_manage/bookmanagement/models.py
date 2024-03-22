@@ -6,7 +6,7 @@ class Book(models.Model):
     author = models.CharField(max_length=100)
     genre = models.CharField(max_length=50)
     book_file=models.FileField(upload_to='books_pdfs', default= "")
-    book_cover=models.ImageField(upload_to='library_manage/books_image', default = "")
+    book_cover=models.ImageField(upload_to='books_image', default = "")
     ratings=models.DecimalField(max_digits=3, decimal_places=1, default = 2)
     status_choices = [
         ('available', 'Available'),

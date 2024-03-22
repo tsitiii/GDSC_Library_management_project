@@ -5,6 +5,7 @@ from account.models import User
 from borrowingmanagement.models import BorrowedBook
 from django.http import Http404
 from django.contrib import messages
+from .forms import BookForm
 
 def admin_required(view_func):
     def wrapper(request, *args, **kwargs):
@@ -27,47 +28,49 @@ def book_list(request):
 @admin_required
 def add_book(request):
     if request.method == 'POST':
-        t = request.POST["title"]
-        a = request.POST["author"]
-        g = request.POST["genre"]
-        c = request.POST["cover"]
-        f = request.POST["file"]
-        r=request.POST['rating']
-        
-        book = Book()
-        book.title = t
-        book.author = a
-        book.genre = g
-        book.book_cover = c
-        book.book_file = f
-        book.ratings=r
-        book.save()
-        
-        return redirect('bookmanagement:book_list')
-
-    return render(request, 'bookmanagement/AddBook.html')
+        # Bind form with POST data and FILES data
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()  # Save form data to create a new book object
+            messages.success(request, 'Book added successfully.')
+            return redirect('bookmanagement:book_list')
+        else:
+            messages.error(request, 'Form is not valid. Please check your input.')
+    else:
+        form = BookForm()  # Create a blank form instance if the request method is not POST
+    return render(request, 'bookmanagement/AddBook.html', {'form': form})
 
 
-@login_required(login_url='login')
+@login_required
 @admin_required
 def edit_book(request):
-    if request.method=='POST':
-        t= request.POST["title"]
-        a= request.POST["author"]
-        g = request.POST["genre"]
-        s=request.POST["status"]
-        f=request.POST["File"]
-        c=request.POST['cover']
+    if request.method == 'POST':
+        book_id = request.POST.get('bookid')
+        if book_id:
+            try:
+                book = Book.objects.get(id=book_id)
+                book.title = request.POST.get("title")
+                book.author = request.POST.get("author")
+                book.genre = request.POST.get("genre")
+                book.status = request.POST.get("status")
+                
+                # Handle file inputs separately from request.POST
+                if 'file' in request.FILES:
+                    book.book_file = request.FILES['file']
+                if 'cover' in request.FILES:
+                    book.book_cover = request.FILES['cover']
+                    
+                book.save()
+                return redirect('bookmanagement:book_list')
+            except Book.DoesNotExist:
+                messages.error(request, "Book not found.")
+        else:
+            messages.error(request, "Invalid request: No book ID provided.")
+    else:
+        messages.error(request, "Invalid request method.")
+    return redirect('bookmanagement:book_list')
 
-        book= Book.objects.get(id=request.POST['bookid'])
-        book.title=t
-        book.author=a
-        book.genre = g
-        book.status=s
-        book.book_file=f
-        book.book_cover=c
-        book.save()
-        return redirect('bookmanagement:book_list')
+
     
 @login_required(login_url='login')
 @admin_required

@@ -1,152 +1,134 @@
-
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  
+
     <style>
-    .forms{
-        margin-left: 20rem;
-    }
-  </style>
+        .forms {
+            margin-left: 20rem;
+        }
+    </style>
 
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-      box-shadow:1px 2px 5px  rgba(3, 19, 37,0.5);
-      background:rgba(3, 0, 0, 0.8);
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-    nav ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            box-shadow: 1px 2px 5px rgba(3, 19, 37, 0.5);
+            background: rgba(3, 0, 0, 0.8);
+        }
 
-    nav ul li {
-      display: inline;
-      margin-right: 10px;
-    }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
 
-    main {
-      padding: 20px;
-    }
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
 
-    h1 {
-      color: #333;
-      text-align:center;
-      margin-top:50px;
-    }
+        main {
+            padding: 20px;
+        }
 
-    .book {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-    }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 50px;
+        }
 
-    .book img {
-      width: 100px;
-      height: 150px;
-      margin-right: 10px;
-    }
-    
-    .table {
-      margin-top: 20px;
-    }
-  </style>
+        .book {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
 
+        .book img {
+            width: 100px;
+            height: 150px;
+            margin-right: 10px;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+    </style>
 
     <title>Edit Book</title>
-  </head>
-  <body>
-   
-    <header>
-      <nav>
+</head>
+<body>
+
+<header>
+    <nav>
         <ul>
-          
-          <li><a href="{% url 'home' %}" style="color:#fff; text-decoration: none; font-weight: bold; font-size: 18px;">Home</a></li>
-          <li><a href="{% url 'bookmanagement:book_list' %}" style="color:#fff; text-decoration: none; font-weight: bold; font-size: 18px;">Book Management</a></li>
-          <li><a href="{% url 'bookmanagement:add_book' %}" style="color:#fff; text-decoration: none; font-weight: bold; font-size: 18px;">Add Books</a></li>
-          <li><a href="{% url 'bookmanagement:borrowed' %}" style="color:#fff; text-decoration: none; font-weight: bold; font-size: 18px;">Borrowed Books</a></li>
+            <li><a href="{% url 'home' %}" style="color:#fff; text-decoration: none; font-weight: bold; font-size: 18px;">Home</a></li>
+            <li><a href="{% url 'bookmanagement:book_list' %}" style="color:#fff; text-decoration: none; font-weight: bold; font-size: 18px;">Book Management</a></li>
+            <li><a href="{% url 'bookmanagement:add_book' %}" style="color:#fff; text-decoration: none; font-weight: bold; font-size: 18px;">Add Books</a></li>
+            <li><a href="{% url 'bookmanagement:borrowed' %}" style="color:#fff; text-decoration: none; font-weight: bold; font-size: 18px;">Borrowed Books</a></li>
         </ul>
         <ul>
-          <li><a href="{% url 'logout' %}" style="color:#fff; text-decoration: none; font-weight: bold; font-size: 18px;">Logout <i class="fa-solid fa-right-from-bracket"></i></a></li>
+            <li><a href="{% url 'logout' %}" style="color:#fff; text-decoration: none; font-weight: bold; font-size: 18px;">Logout <i class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>
-        </nav>
-        </header>
-        
+    </nav>
+</header>
 
-    
-<div class="container" >
+<div class="container">
+    <h1 class="mt-2">Edit Book</h1> <br>
 
-    <h1 mt-2>Edit Book</h1> <br>
-
-    <form class="mt-4" action="edit" method="POST">
+    <form class="mt-4" action="edit" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
-          <input type="hidden" name="bookid" value="{{book.id}}">
-          <label for="title">Title</label>
-          <input type="text" class="form-control" id="title" name="title" placeholder="enter title here" value="{{book.title}}">
-          <small id="titleHelp" class="form-text text-muted">we will try to find ur fav book here! </small>
-        
+            <input type="hidden" name="bookid" value="{{ book.id }}">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Enter title here" value="{{ book.title }}">
+            <small id="titleHelp" class="form-text text-muted">We will try to find your favorite book here!</small>
         </div>
         <div class="form-group">
-          <label for="author">Author</label>
-          <input type="text" class="form-control" id="author" name="author" placeholder="enter author here" value="{{book.author}}">
-        </div>
-
-        <div class="form-group">
-          <label for="genre">Genre</label>
-          <input type="text" class="form-control" id="genre" name="genre" placeholder="enter genre here" value="{{book.genre}}">
+            <label for="author">Author</label>
+            <input type="text" class="form-control" id="author" name="author" placeholder="Enter author here" value="{{ book.author }}">
         </div>
         <div class="form-group">
-            <label for="status ">Status</label>
-            <input type="text" class="form-control" id="status" name="status" placeholder="enter status here" value="{{book.status}}">
-          </div>
-
-          <div class="form-group">
-            <label for="File">Book PDF</label>
-            <input type="file" class="form-control" id="File" name="File" placeholder="enter file here" value="{{book.book_file}}" accept=".PDF">
-          </div>
-
-          <div class="form-group">
+            <label for="genre">Genre</label>
+            <select class="form-control" id="genre" name="genre">
+                <option value="fictional" {% if book.genre == 'fictional' %} selected {% endif %}>Fictional</option>
+                <option value="educational" {% if book.genre == 'educational' %} selected {% endif %}>Educational</option>
+                <option value="drama" {% if book.genre == 'drama' %} selected {% endif %}>Drama</option>
+                <option value="non-fictional" {% if book.genre == 'non-fictional' %} selected {% endif %}>Non-Fictional</option>
+                <option value="romance" {% if book.genre == 'romance' %} selected {% endif %}>Romance</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <input type="text" class="form-control" id="status" name="status" placeholder="Enter status here" value="{{ book.status }}">
+        </div>
+        <div class="form-group">
+            <label for="file">Book PDF</label>
+            <input type="file" class="form-control" id="file" name="file" placeholder="Enter file here" accept=".PDF">
+        </div>
+        <div class="form-group">
             <label for="cover">Book cover</label>
-            <input type="file" class="form-control" id="cover" name="cover" placeholder="enter cover here" value="{{book.book_cover}}" accept="image/*">
-          </div>
-
+            <input type="file" class="form-control" id="cover" name="cover" placeholder="Enter cover here" accept="image/*">
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-      <br>
-
-      
+    </form>
+    <br>
 </div>
 
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://kit.fontawesome.com/4dc0af90fd.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-
-
-  </body>
-</html>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://kit.fontawesome.com/4dc0af90fd.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBv
