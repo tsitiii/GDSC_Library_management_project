@@ -17,18 +17,14 @@
       padding: 0;
     }
 
-    header {
-      background-color: burlywood;
-      color: #fff;
-      padding: 10px;
-      text-align: center;
-    }
-
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
+      padding: 15px 20px;
+      box-shadow:1px 2px 5px  rgba(3, 19, 37,0.5);
+      background:rgba(3, 0, 0, 0.8);
+        }
 
     nav ul {
       list-style-type: none;
@@ -89,21 +85,20 @@
   <header>
     <nav>
       <ul>
-        <li><a href="{% url 'home' %}" style="text-decoration: none; font-weight: bold; font-size: 18px;">Home</a></li>
-        <li><a href="booklist" style="text-decoration: none; font-weight: bold; font-size: 18px;">Book Management</a></li>
-        <li><a href="AddBook" style="text-decoration: none; font-weight: bold; font-size: 18px;">Add Books</a></li>
-        <li><a href="Borrowed" style="text-decoration: none; font-weight: bold; font-size: 18px;">Borrowed Books</a></li>
+        <li><a href="{% url 'home' %}" style="color:white; text-decoration: none; font-weight: bold; font-size: 18px;">Home</a></li>
+        <li><a href="booklist" style="color:white; text-decoration: none; font-weight: bold; font-size: 18px;">Book Management</a></li>
+        <li><a href="AddBook" style="color:white; text-decoration: none; font-weight: bold; font-size: 18px;">Add Books</a></li>
+        <li><a href="Borrowed" style="color:white; text-decoration: none; font-weight: bold; font-size: 18px;">Borrowed Books</a></li>
       </ul>
       <ul>
-        <li><a href="#" style="text-decoration: none; font-weight: bold; font-size: 18px;">Admin Profile</a></li>
-        <li><a href="{% url 'logout' %}" style="text-decoration: none; font-weight: bold; font-size: 18px;">Logout</a></li>
+        <li><a href="{% url 'logout' %}" style="color:white; text-decoration: none; font-weight: bold; font-size: 18px;">Logout <i class="fa-solid fa-right-from-bracket"></i></a></li>
       </ul>
       
       </header>
      
   <div class="container">
 
-    <h1 class="mt-2">Add Book</h1> <br>
+    <h1 class="mt-2"><i class="fa-solid fa-book"></i> Add Book</h1> <br>
 
     <form class="mt-3" action="AddBook" method="POST">
       {% csrf_token %}
@@ -148,6 +143,7 @@
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://kit.fontawesome.com/4dc0af90fd.js" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/4dc0af90fd.js" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
