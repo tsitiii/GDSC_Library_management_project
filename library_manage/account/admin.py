@@ -10,9 +10,9 @@ admin.site.index_title = 'Welcome to the Library Management System'
 
 class CustomUserAdmin(BaseUserAdmin):
     list_display = ['username', 'email', 'is_admin', 'is_student', 'is_superuser','is_banned']
-    list_filter = ['is_admin', 'is_student', 'is_superuser']
+    list_filter = ['is_admin', 'is_student', 'is_superuser', 'is_banned']
     search_fields = ['username', 'email']
-    actions = ['make_admin', 'make_student']
+    actions = ['make_admin', 'make_student', 'ban_student']
 
     def make_admin(self, request, queryset):
         queryset.update(is_admin=True, is_student=False)
@@ -23,6 +23,11 @@ class CustomUserAdmin(BaseUserAdmin):
         queryset.update(is_student=True, is_admin=False)
 
     make_student.short_description = "Make selected user/users student"
+
+    def ban_student(self, request, queryset):
+        queryset.update(is_student=True, is_banned=True)
+    
+    ban_student.short_description = "Ban selected User/Users"
 
     def has_change_permission(self, request, obj=None):
         if obj and obj.is_superuser:

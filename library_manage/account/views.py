@@ -30,20 +30,24 @@ def terms_and_conditions(request):
 
 
 def loginview(request):
-    form=LoginForm()
-    msg= None
-    if request.method=='POST':
-        form=LoginForm(request.POST)
-        if form.is_valid(): #checking if the form we defined in the forms.py have no error
-            Username=form.cleaned_data.get('username')# retrivies the validated data of the username that we defined in our forms.py
-            Password=form.cleaned_data.get('password')# retrivies the validated data of password in our forms.py
+    form = LoginForm()
+    msg = None
+    banned_msg = None  # Initialize banned message variable
+    
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            Username = form.cleaned_data.get('username')
+            Password = form.cleaned_data.get('password')
       
-            user=authenticate(username=Username, password=Password)
+            user = authenticate(username=Username, password=Password)
 
             if user is not None and user.is_student:
-                login(request, user)
-                # flag = True
-                return redirect('home')
+                if user.is_banned:
+                    banned_msg = "You are banned from accessing the system."  # Set banned message
+                else:
+                    login(request, user)
+                    return redirect('home')
             
             elif user is not None and user.is_admin:
                 login(request, user)
@@ -53,11 +57,13 @@ def loginview(request):
                 login(request, user)
                 return redirect('admin')
             else:
-                msg="Invalid credentials!"
+                msg = "Invalid credentials!"
         else:
-            msg="Error while validating form!"
-    context={'form': form, 'msg': msg}
-    return render(request, 'account/login.html',context=context)
+            msg = "Error while validating form!"
+    
+    context = {'form': form, 'msg': msg, 'banned_msg': banned_msg}  
+    return render(request, 'account/login.html', context=context)
+
 
 def logoutform(request):
     logout(request)

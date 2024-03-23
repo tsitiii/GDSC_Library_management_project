@@ -75,7 +75,7 @@
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
             <div class="form-field">
-                <label for="{{ form.username.id_for_label }}">Username:</label> <!--the id_for_label creates unique id for the input field of the ussername and assign it to its id part coz label and input are connected with thier id-->
+                <label for="{{ form.username.id_for_label }}">Username:</label>
                 {{ form.username }}
             </div>
             <div class="form-field">
@@ -84,10 +84,13 @@
             </div>
             <button type="submit">Login</button>
             {% if msg %}
-           <p>{{ msg }}</p>
+               <p>{{ msg }}</p>
+               {% if banned_msg %}
+                   <p>{{ banned_msg }}</p>
+               {% endif %}
             {% endif %}
         </form>
-        <p>Don't have an account? <b><a href="{% url 'register' %}" style="text-decoration:none; color:#2196F3;">Register here</a></p>
+        <p>Don't have an account? <b><a href="{% url 'register' %}" style="text-decoration:none; color:#2196F3;">Register here</a></b></p>
     </div>
 </body>
 </html>
