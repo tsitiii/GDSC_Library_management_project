@@ -132,7 +132,6 @@
           {%if book.status == "available"%}
           <a href="{% url 'borrowingmanagement:borrow_book' book_id=book.id %}" class="cardd-link">Borrow Book</a>
           {%endif%}
-          <a href="{% url 'reviewsmanagement:book_detail' book.title %}" class="cardd-link">Review Book</a>
         </div>
       </div>
       {%endfor%}

@@ -142,7 +142,6 @@ display: none;
         </ul>
         <div class="cardd-body links">
           <a href="{% url 'reviews:book_detail' book.title %}" class="cardd-link">Review Book</a>
-         <a href="{% url 'borrowingmanagement:Return' book.id  %}" class="cardd-link">Return Book</a> 
         </div>
         </div>
         {%endfor%}
