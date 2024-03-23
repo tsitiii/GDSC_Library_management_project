@@ -43,13 +43,22 @@ def book_detail(request, book_title):
 @login_required(login_url='login')
 def edit_review(request, review_id):
     review = get_object_or_404(Review, id=review_id)
+    
+    # Delete previous review
+    review.delete()
+    
     if request.method == 'POST':
-        form = ReviewForm(request.POST, instance=review)
+        form = ReviewForm(request.POST)
         if form.is_valid():
-            form.save()
+            review = form.save(commit=False)
+            review.user = request.user
+            review.book = review.book  # Ensure the book remains the same
+            review.save()
             return redirect('reviewsmanagement:book_detail', book_title=review.book.title)
     else:
-        form = ReviewForm(instance=review)
+        # Pre-fill form fields with content of the previous review
+        form = ReviewForm(initial={'rating': review.rating, 'comment': review.comment})
+
     # Get the book associated with the review
     book = review.book
     
