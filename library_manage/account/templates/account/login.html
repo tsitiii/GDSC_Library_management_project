@@ -84,7 +84,9 @@
             </div>
             <button type="submit">Login</button>
             {% if msg %}
-               <p>{{ msg }}</p>
+               {% if not banned_msg %}  
+                   <p>{{ msg }}</p>  
+               {% endif %}
                {% if banned_msg %}
                    <p>{{ banned_msg }}</p>
                {% endif %}
