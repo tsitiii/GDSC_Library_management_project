@@ -112,24 +112,27 @@
                 <th scope="col">Book</th>
                 <th scope="col">Borrowed Date</th>
                 <th scope="col">Borrowed By</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for i in books %} 
-                <tr>
-                  <th scope="row">{{ forloop.counter }}</th>
-                  <td>{{ i.book }}</td>
-                  <td>{{ i.borrow_date }}</td>
-                  <td>{{ i.user }}</td>
-                  <td>
-                    {% if user.is_superuser %}
-                      <a href="ban?userid={{ i.user.id }}"><button type="button"  class="btn btn-warning">Ban Student</button></a>
-                    {% endif %}
-                  </td>
-                </tr>
-              {% endfor %} 
-            </tbody>
+                {% if user.is_superuser %}
+      <th scope="col">Action</th>
+    {% endif %}
+  </tr>
+</thead>
+<tbody>
+  {% for i in books %} 
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ i.book }}</td>
+      <td>{{ i.borrow_date }}</td>
+      <td>{{ i.user }}</td>
+      {% if user.is_superuser %}
+        <td>
+          <a href="ban?userid={{ i.user.id }}"><button type="button"  class="btn btn-warning">Ban Student</button></a>
+        </td>
+      {% endif %}
+    </tr>
+  {% endfor %} 
+</tbody>
+
           </table>
     </table>
     <p>
